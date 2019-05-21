@@ -13,22 +13,30 @@ const userSchema = new Schema({
     type: String,
     required: true
   },
-  tweets: [{
-    type: Schema.Types.ObjectId,
-    ref: "Tweet"
-  }],
-  likes: [{
-    type: Schema.Types.ObjectId,
-    ref: "Tweet"
-  }],
-  following: [{
-    type: Schema.Types.ObjectId,
-    ref: "User"
-  }],
-  followers: [{
-    type: Schema.Types.ObjectId,
-    ref: "User"
-  }]
+  tweets: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Tweet"
+    }
+  ],
+  likes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Tweet"
+    }
+  ],
+  following: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
+  followers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ]
 });
 
 userSchema.methods.validatePassword = function(password) {

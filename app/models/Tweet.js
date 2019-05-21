@@ -11,18 +11,24 @@ const tweetSchema = new Schema({
     type: String,
     required: true
   },
-  likers: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
-  },
-  retweeters: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
-  },
-  replies: {
-    type: Schema.Types.ObjectId,
-    ref: "Tweet"
-  }
+  likers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
+  retweeters: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User"
+    }
+  ],
+  replies: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Tweet"
+    }
+  ]
 });
 
 const Tweet = model("Tweet", tweetSchema);
