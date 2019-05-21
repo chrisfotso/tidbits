@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
+const bcrypt = require("bcryptjs");
+
 const userSchema = new Schema({
   displayName: String,
   handle: {
@@ -28,6 +30,14 @@ const userSchema = new Schema({
     ref: "User"
   }
 });
+
+userSchema.methods.validatePassword = function(password) {
+  return bcrypt.compare(password, this.password);
+};
+
+userSchema.statics.hashPassword = function(password) {
+  return bcrypt.hash(password, 10);
+};
 
 const User = model("User", userSchema);
 
