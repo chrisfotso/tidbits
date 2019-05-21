@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
@@ -16,6 +15,10 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Tweet"
   },
+  likes: {
+    type: Schema.Types.ObjectId,
+    ref: "Tweet"
+  },
   following: {
     type: Schema.Types.ObjectId,
     ref: "User"
@@ -25,3 +28,7 @@ const userSchema = new Schema({
     ref: "User"
   }
 });
+
+const User = model("User", userSchema);
+
+module.exports = User;
