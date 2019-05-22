@@ -29,18 +29,17 @@ router.post("/register", async (req, res) => {
   }
 
   if (await usernameExistsInDatabase(username)) {
-    return res
-      .status(422)
-      .send({ err: "Username already exists in database." });
+    return res.status(422).send({
+      err: "Username already registered, please choose a different one."
+    });
   }
 
   try {
     const hashedPassword = await User.hashPassword(password);
     const savedUser = await User.create({ username, password: hashedPassword });
-
     return res.status(201).send(savedUser);
   } catch (error) {
-    return res.status(500).send({ msg: "Unknown error occured", err });
+    return res.status(500).send({ msg: "Unknown error occured", error });
   }
 });
 
@@ -58,6 +57,33 @@ router.post("/login", async (req, res) => {
   //Else if passwords do match:
   //Figure out how to do authentication - Passport or JWT or cookies? All three?
   //Success, redirect to home screen and display tweets
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res
+      .status(400)
+      .send({ err: "Please enter a username and password." });
+  }
+
+  if (!(await usernameExistsInDatabase(username))) {
+    return res.status(404).send({ err: "Username is not registered." });
+  }
+
+  try {
+    const foundUser = await User.findOne({
+      username: { $regex: new RegExp(username, "i") }
+    });
+
+    const passwordsMatch = await foundUser.validatePassword(password);
+
+    if (!passwordsMatch) {
+      return res.status(400).send({ err: "Password is incorrect" });
+    }
+
+    return res.status(200).send({ msg: "Success: logged in", user: foundUser });
+  } catch (error) {
+    return res.status(500).send({ msg: "Unknown error occured", error });
+  }
 });
 
 module.exports = router;
