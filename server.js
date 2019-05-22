@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-const DB_URL = `mongodb+srv://chrisadmin:Adminkflowslime17@cluster0-mealh.mongodb.net/test?retryWrites=true`;
+const { DB_URL } = require("./config");
 const userRouter = require("./app/routes/userRouter");
 
 const app = express();

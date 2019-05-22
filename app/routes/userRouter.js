@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/User");
+const { JWT_SECRET } = require("../../config");
 
 const { usernameExistsInDatabase } = require("./functions/userFunctions");
 
@@ -37,7 +39,11 @@ router.post("/register", async (req, res) => {
   try {
     const hashedPassword = await User.hashPassword(password);
     const savedUser = await User.create({ username, password: hashedPassword });
-    return res.status(201).send(savedUser);
+    const { id } = savedUser;
+
+    const token = jwt.sign(id, JWT_SECRET, { expiresIn: "24h" });
+
+    res.status(201).send(token);
   } catch (error) {
     return res.status(500).send({ msg: "Unknown error occured", error });
   }
