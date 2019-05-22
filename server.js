@@ -2,10 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const DB_URL = `mongodb+srv://chrisadmin:Adminkflowslime17@cluster0-mealh.mongodb.net/test?retryWrites=true`;
-
+const userRouter = require("./app/routes/userRouter");
 const app = express();
 
 app.use(express.json());
+app.use(userRouter);
 
 const port = process.env.PORT || 5000;
 

@@ -28,7 +28,11 @@ const tweetSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Tweet"
     }
-  ]
+  ],
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 const Tweet = model("Tweet", tweetSchema);
