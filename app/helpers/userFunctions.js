@@ -1,6 +1,6 @@
 const User = require("../models/User");
 
-const usernameExistsInDatabase = async username => {
+module.exports.usernameExistsInDatabase = async username => {
   const query = {
     username: { $regex: new RegExp(username, "i") }
   };
@@ -8,8 +8,4 @@ const usernameExistsInDatabase = async username => {
   const existingUser = await User.findOne(query).exec();
 
   return Boolean(existingUser);
-};
-
-module.exports = {
-  usernameExistsInDatabase
 };

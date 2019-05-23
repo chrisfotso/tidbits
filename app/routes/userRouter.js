@@ -10,8 +10,6 @@ const {
 
 const { JWT_SECRET } = require("../../config");
 
-const { usernameExistsInDatabase } = require("../helpers/userFunctions");
-
 //Endpoint for registering a new user
 router.post("/register", verifyRegisterInput, async (req, res) => {
   const { username, password } = req.body;
