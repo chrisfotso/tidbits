@@ -35,6 +35,12 @@ const tweetSchema = new Schema({
   }
 });
 
+tweetSchema.methods.addTweeter = async function(userId) {
+  this.tweeter = userId;
+  this.save();
+  return this;
+};
+
 const Tweet = model("Tweet", tweetSchema);
 
 module.exports = Tweet;

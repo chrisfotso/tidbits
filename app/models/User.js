@@ -47,6 +47,12 @@ userSchema.statics.hashPassword = function(password) {
   return bcrypt.hash(password, 10);
 };
 
+userSchema.methods.addTweet = async function(tweetId) {
+  this.tweets.push(tweetId);
+  this.save();
+  return;
+};
+
 const User = model("User", userSchema);
 
 module.exports = User;
