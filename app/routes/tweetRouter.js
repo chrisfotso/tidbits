@@ -8,8 +8,6 @@ const jwt = require("jsonwebtoken");
 const { verifyToken } = require("../../jwtConfig");
 const { JWT_SECRET } = require("../../config");
 
-// "eyJhbGciOiJIUzI1NiJ9.Y2hyaXNwb3N0cw.C8t0qPP-T1q_iy4CdH9jRoZkNqaTg0jBx6rZXTl2_Oc"
-
 router.post("/new", verifyToken, async (req, res) => {
   const {
     jwtUser,
