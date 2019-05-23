@@ -4,9 +4,7 @@ const router = express.Router();
 const User = require("../models/User");
 const Tweet = require("../models/Tweet");
 
-const jwt = require("jsonwebtoken");
-const { verifyToken } = require("./middleware/middleware");
-const { JWT_SECRET } = require("../../config");
+const { verifyToken } = require("../middlewares/jwtMiddleware");
 
 //Endpoint for creating a new tweet
 router.post("/new", verifyToken, async (req, res) => {
