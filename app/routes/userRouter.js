@@ -39,11 +39,8 @@ router.post("/register", async (req, res) => {
   try {
     const hashedPassword = await User.hashPassword(password);
     const savedUser = await User.create({ username, password: hashedPassword });
-    const { id } = savedUser;
 
-    const token = jwt.sign(id, JWT_SECRET, { expiresIn: "24h" });
-
-    res.status(201).send(token);
+    return res.status(201).send(savedUser);
   } catch (error) {
     return res.status(500).send({ msg: "Unknown error occured", error });
   }
@@ -63,22 +60,22 @@ router.post("/login", async (req, res) => {
   //Else if passwords do match:
   //Figure out how to do authentication - Passport or JWT or cookies? All three?
   //Success, redirect to home screen and display tweets
-  const { username, password } = req.body;
+  const { username: bodyUsername, password } = req.body;
 
-  if (!username || !password) {
+  if (!bodyUsername || !password) {
     return res
       .status(400)
       .send({ err: "Please enter a username and password." });
   }
 
-  if (!(await usernameExistsInDatabase(username))) {
+  if (!(await usernameExistsInDatabase(bodyUsername))) {
     return res.status(404).send({ err: "Username is not registered." });
   }
 
   try {
     const foundUser = await User.findOne({
-      username: { $regex: new RegExp(username, "i") }
-    });
+      username: { $regex: new RegExp(bodyUsername, "i") }
+    }).exec();
 
     const passwordsMatch = await foundUser.validatePassword(password);
 
@@ -86,9 +83,12 @@ router.post("/login", async (req, res) => {
       return res.status(400).send({ err: "Password is incorrect" });
     }
 
-    return res.status(200).send({ msg: "Success: logged in", user: foundUser });
+    const { username: databaseUsername } = foundUser;
+    const token = jwt.sign(databaseUsername, JWT_SECRET);
+
+    return res.status(200).send({ token });
   } catch (error) {
-    return res.status(500).send({ msg: "Unknown error occured", error });
+    return res.status(500).send({ error });
   }
 });
 

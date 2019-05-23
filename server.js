@@ -3,11 +3,14 @@ const mongoose = require("mongoose");
 
 const { DB_URL } = require("./config");
 const userRouter = require("./app/routes/userRouter");
+const tweetRouter = require("./app/routes/tweetRouter");
 
 const app = express();
 
 app.use(express.json());
-app.use(userRouter);
+
+app.use("/user", userRouter);
+app.use("/tweet", tweetRouter);
 
 const port = process.env.PORT || 5000;
 
