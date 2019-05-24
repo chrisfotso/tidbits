@@ -11,6 +11,7 @@ router.get("/:id", async (req, res) => {
   const { id: tweetId } = req.params;
   const retrievedTweet = await Tweet.findOne({ tweetId }).exec();
 
+  //findOne() returns null if no document is found
   if (!retrievedTweet) {
     return res
       .status(404)
@@ -20,22 +21,23 @@ router.get("/:id", async (req, res) => {
   return res.status(200).send(retrievedTweet);
 });
 
+//DELETE endpoint for deleting a tweet
 router.delete("/:id", async (req, res) => {
   const { id: tweetId } = req.params;
   const deletedTweet = await Tweet.findOneAndDelete({ tweetId }).exec();
 
+  //findOneAndDelete() returns null if a document matching the conditions was not found
+  //If there's no document with a matching tweetId, that means no tweet to delete
   if (!deletedTweet) {
     return res.status(400).send({
       err: `Tweet with id of ${tweetId} could not be deleted because it does not exist`
     });
   }
 
-  return res
-    .status(200)
-    .send({
-      msg: `Success: tweet with id of ${tweetId} has been deleted`,
-      deletedTweet
-    });
+  return res.status(200).send({
+    msg: `Success: tweet with id of ${tweetId} has been deleted`,
+    deletedTweet
+  });
 });
 
 //POST endpoint for creating a new tweet
