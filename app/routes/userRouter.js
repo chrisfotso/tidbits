@@ -10,7 +10,7 @@ const {
 
 const { JWT_SECRET } = require("../../config");
 
-//Endpoint for registering a new user
+//POST endpoint for creating a new user
 router.post("/register", verifyRegisterInput, async (req, res) => {
   const { username, password } = req.body;
 
@@ -20,21 +20,22 @@ router.post("/register", verifyRegisterInput, async (req, res) => {
   return res.status(201).send(savedUser);
 });
 
-//Endpoint for logging in an already registered user
+//POST endpoint for logging in already registered user
 router.post("/login", verifyLoginInput, async (req, res) => {
   const { username: bodyUsername, password } = req.body;
 
-  const foundUser = await User.findOne({
+  //Finding user with username from body (case-insensitive regex)
+  const retrievedUser = await User.findOne({
     username: { $regex: new RegExp(bodyUsername, "i") }
   }).exec();
 
-  const passwordsMatch = await foundUser.validatePassword(password);
+  const passwordsMatch = await retrievedUser.validatePassword(password);
 
   if (!passwordsMatch) {
     return res.status(400).send({ err: "Password is incorrect" });
   }
 
-  const { username: databaseUsername } = foundUser;
+  const { username: databaseUsername } = retrievedUser;
   const token = jwt.sign(databaseUsername, JWT_SECRET);
 
   return res.status(200).send({ token });

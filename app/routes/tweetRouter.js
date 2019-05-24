@@ -6,7 +6,7 @@ const Tweet = require("../models/Tweet");
 
 const { verifyToken } = require("../middlewares/jwtMiddleware");
 
-//Endpoint for creating a new tweet
+//POST endpoint for creating a new tweet
 router.post("/new", verifyToken, async (req, res) => {
   //Destructuring: jwtUser was added to req in verifyToken middleware, text is from req body
   const {
@@ -14,7 +14,7 @@ router.post("/new", verifyToken, async (req, res) => {
     body: { text }
   } = req;
 
-  //Finding user with username from JWT (case-insensitive)
+  //Finding user with username from JWT (case-insensitive regex)
   const retrievedUser = await User.findOne({
     username: { $regex: new RegExp(jwtUser, "i") }
   }).exec();
