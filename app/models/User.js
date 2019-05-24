@@ -50,7 +50,7 @@ userSchema.statics.hashPassword = function(password) {
 userSchema.methods.addTweet = async function(tweetId) {
   this.tweets.push(tweetId);
   this.save();
-  return;
+  return this;
 };
 
 const User = model("User", userSchema);

@@ -7,7 +7,7 @@ const tweetSchema = new Schema({
   tweetId: {
     type: String,
     required: true,
-    default: uniqid()
+    default: uniqid
   },
   tweeter: {
     type: Schema.Types.ObjectId,
@@ -41,6 +41,13 @@ const tweetSchema = new Schema({
     default: Date.now
   }
 });
+
+tweetSchema.methods.addReply = function(tweetId) {
+  this.replies.push(tweetId);
+  this.save();
+
+  return this.replies;
+};
 
 const Tweet = model("Tweet", tweetSchema);
 

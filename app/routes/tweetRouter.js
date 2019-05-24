@@ -5,6 +5,7 @@ const User = require("../models/User");
 const Tweet = require("../models/Tweet");
 
 const { verifyToken } = require("../middlewares/jwtMiddleware");
+const { createTweet } = require("../middlewares/tweetMiddleware");
 
 //GET endpoint for retrieving a tweet
 router.get("/:id", async (req, res) => {
@@ -41,28 +42,8 @@ router.delete("/:id", async (req, res) => {
 });
 
 //POST endpoint for creating a new tweet
-router.post("/new", verifyToken, async (req, res) => {
-  //Destructuring: jwtUser was added to req in verifyToken middleware, text is from req body
-  const {
-    jwtUser,
-    body: { text }
-  } = req;
-
-  //Finding user with username from JWT (case-insensitive regex)
-  const retrievedUser = await User.findOne({
-    username: { $regex: new RegExp(jwtUser, "i") }
-  }).exec();
-
-  //Destructuring: getting id from foundUser document and declaring renamed variable userId
-  const { id: userId } = retrievedUser;
-
-  const newTweet = {
-    tweeter: userId,
-    text
-  };
-
-  const savedTweet = await Tweet.create(newTweet);
-  const tweetObjId = savedTweet.id;
+router.post("/new", verifyToken, createTweet, async (req, res) => {
+  const { tweetObjId, savedTweet, retrievedUser } = req;
 
   await retrievedUser.addTweet(tweetObjId);
 
@@ -74,6 +55,38 @@ router.post("/new", verifyToken, async (req, res) => {
       text: savedTweet.text
     }
   });
+});
+
+//POST endpoint for replying to tweet
+router.post("/:id/reply", verifyToken, createTweet, async (req, res) => {
+  const { id: tweetId } = req.params;
+  const { tweetObjId } = req;
+
+  const query = { tweetId };
+
+  //Updating existing tweet with tweetId specified in URL params
+  //Pushing objectId of new tweet onto the replies of already existing tweet
+  const update = {
+    $push: {
+      replies: tweetObjId
+    }
+  };
+
+  //Setting option "new" to true returns the updated document
+  const options = { new: true };
+
+  const tweetUpdatedWithReply = await Tweet.findOneAndUpdate(
+    query,
+    update,
+    options
+  )
+    .select("text replies") //I only want the "text" field and the "replies" field
+    .populate("replies", "tweetId tweeter text replies") //populate() returns the entire subdocument instead of just the objectId
+    .exec();
+
+  return res
+    .status(201)
+    .send({ msg: "Success, tweet reply created", tweetUpdatedWithReply });
 });
 
 module.exports = router;
