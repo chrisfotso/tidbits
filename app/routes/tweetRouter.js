@@ -6,6 +6,38 @@ const Tweet = require("../models/Tweet");
 
 const { verifyToken } = require("../middlewares/jwtMiddleware");
 
+//GET endpoint for retrieving a tweet
+router.get("/:id", async (req, res) => {
+  const { id: tweetId } = req.params;
+  const retrievedTweet = await Tweet.findOne({ tweetId }).exec();
+
+  if (!retrievedTweet) {
+    return res
+      .status(404)
+      .send({ err: `Tweet with id of ${tweetId} does not exist` });
+  }
+
+  return res.status(200).send(retrievedTweet);
+});
+
+router.delete("/:id", async (req, res) => {
+  const { id: tweetId } = req.params;
+  const deletedTweet = await Tweet.findOneAndDelete({ tweetId }).exec();
+
+  if (!deletedTweet) {
+    return res.status(400).send({
+      err: `Tweet with id of ${tweetId} could not be deleted because it does not exist`
+    });
+  }
+
+  return res
+    .status(200)
+    .send({
+      msg: `Success: tweet with id of ${tweetId} has been deleted`,
+      deletedTweet
+    });
+});
+
 //POST endpoint for creating a new tweet
 router.post("/new", verifyToken, async (req, res) => {
   //Destructuring: jwtUser was added to req in verifyToken middleware, text is from req body
