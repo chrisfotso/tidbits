@@ -15,12 +15,12 @@ router.post("/new", verifyToken, async (req, res) => {
   } = req;
 
   //Finding user with username from JWT (case-insensitive)
-  const foundUser = await User.findOne({
+  const retrievedUser = await User.findOne({
     username: { $regex: new RegExp(jwtUser, "i") }
   }).exec();
 
   //Destructuring: getting id from foundUser document and declaring renamed variable userId
-  const { id: userId } = foundUser;
+  const { id: userId } = retrievedUser;
 
   const newTweet = {
     tweeter: userId,
@@ -28,17 +28,14 @@ router.post("/new", verifyToken, async (req, res) => {
   };
 
   const savedTweet = await Tweet.create(newTweet);
-  const tweetId = savedTweet.id;
+  const tweetObjId = savedTweet.id;
 
-  await Promise.all([
-    //These two methods are declared in the User and Tweet models
-    savedTweet.addTweeter(userId),
-    foundUser.addTweet(tweetId)
-  ]);
+  await retrievedUser.addTweet(tweetObjId);
 
   return res.send({
     msg: "Success: tweet created",
     savedTweet: {
+      tweetId: savedTweet.tweetId,
       tweeter: savedTweet.tweeter,
       text: savedTweet.text
     }

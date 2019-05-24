@@ -1,7 +1,14 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
+const uniqid = require("uniqid");
+
 const tweetSchema = new Schema({
+  tweetId: {
+    type: String,
+    required: true,
+    default: uniqid()
+  },
   tweeter: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -34,12 +41,6 @@ const tweetSchema = new Schema({
     default: Date.now
   }
 });
-
-tweetSchema.methods.addTweeter = async function(userId) {
-  this.tweeter = userId;
-  this.save();
-  return this;
-};
 
 const Tweet = model("Tweet", tweetSchema);
 
