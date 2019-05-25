@@ -21,19 +21,24 @@ class App extends Component {
   handleSubmit = async e => {
     e.preventDefault();
 
-    const fetchOptions = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    }
-    
-    const response = await fetch("/user/register", fetchOptions)
-    const registeredUser = await response.json()
+    const reqBody = {
+      username: this.state.username,
+      password: this.state.password
+    };
 
-    console.log(registeredUser)
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(reqBody)
+    };
+
+    const response = await fetch("/user/register", fetchOptions);
+    const registeredUser = await response.json();
+
+    return registeredUser;
   };
 
   render() {
