@@ -1,46 +1,25 @@
 import React, { Fragment, Component } from "react";
 
+import handleInputChange from "../handlers/handleInputChange";
+import handleLoginRegisterSubmit from "../handlers/handleLoginRegisterSubmit";
+
 class Register extends Component {
-  state = {
-    username: "",
-    password: ""
-  };
-
-  handleInputChange = e => {
-    const { name: inputName } = e.target;
-    this.setState({
-      [inputName]: e.target.value
-    });
-  };
-
-  handleSubmit = async e => {
-    e.preventDefault();
-
-    const reqBody = {
-      username: this.state.username,
-      password: this.state.password
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
     };
 
-    const fetchOptions = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(reqBody)
-    };
-
-    const response = await fetch("/user/register", fetchOptions);
-    const registeredUser = await response.json();
-
-    return registeredUser;
-  };
+    this.boundSubmit = handleLoginRegisterSubmit.bind(this, "/user/register");
+    this.handleInputChange = handleInputChange.bind(this);
+  }
 
   render() {
     return (
       <Fragment>
         <div>Register</div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.boundSubmit}>
           <label htmlFor="username">Username</label>
           <br />
           <input
