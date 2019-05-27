@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from "react";
 
-import handleInputChange from "../handlers/handleInputChange";
-import handleLoginRegisterSubmit from "../handlers/handleLoginRegisterSubmit";
+import handleInputChange from "../../handlers/handleInputChange";
+import handleLoginRegisterSubmit from "../../handlers/handleLoginRegisterSubmit";
 
 class Register extends Component {
   constructor(props) {
