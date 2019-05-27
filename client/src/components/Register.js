@@ -7,7 +7,7 @@ class Register extends Component {
   };
 
   handleInputChange = e => {
-    const inputName = e.target.name;
+    const { name: inputName } = e.target;
     this.setState({
       [inputName]: e.target.value
     });

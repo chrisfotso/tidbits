@@ -1,16 +1,13 @@
 import React, { Fragment, Component } from "react";
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: ""
-    };
-  }
+  state = {
+    username: "",
+    password: ""
+  };
 
   handleInputChange = e => {
-    const inputName = e.target.name;
+    const { name: inputName } = e.target;
     this.setState({
       [inputName]: e.target.value
     });
