@@ -9,7 +9,8 @@
   color: $off-black;
 
   &__container {
-    margin-top: -100px;
+    margin-top: -140px;
+
     &--text {
       display: flex;
       flex-direction: column;
@@ -53,12 +54,6 @@
     &:hover {
       cursor: pointer;
       background: #51b0bc;
-    }
-
-    &--login {
-    }
-
-    &--register {
     }
   }
 }

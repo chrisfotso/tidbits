@@ -14,7 +14,7 @@
   background: #55bcc9;
   color: #2f2f2f; }
   .guest-home__container {
-    margin-top: -100px; }
+    margin-top: -140px; }
     .guest-home__container--text {
       display: flex;
       flex-direction: column;
@@ -48,3 +48,38 @@
     .guest-home__button:hover {
       cursor: pointer;
       background: #51b0bc; }
+
+.register {
+  display: flex;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+  color: #2f2f2f;
+  background: #55bcc9;
+  height: 100vh; }
+  .register__container {
+    margin-top: 50px;
+    padding: 20px;
+    background: #fdfdfd;
+    height: 75%;
+    width: 33%; }
+    .register__container > hr {
+      margin-top: 20px; }
+    @media (max-width: 500px) {
+      .register__container {
+        width: 80%; } }
+  .register__header {
+    text-align: center; }
+  .register__form {
+    display: flex;
+    flex-direction: column; }
+  .register__label {
+    font-weight: bold;
+    margin-top: 20px; }
+  .register__input {
+    height: 50px; }
+  .register__submit {
+    color: #2f2f2f;
+    font-family: "Open Sans", sans-serif;
+    margin-top: 20px; }
+    .register__submit:hover {
+      cursor: pointer; }
