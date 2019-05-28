@@ -1,4 +1,50 @@
-.welcomeText {
-  color: red;
-  background: yellow;
-  font-size: 30px; }
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+.guest-home {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: "Open Sans", sans-serif;
+  background: #55bcc9;
+  color: #2f2f2f; }
+  .guest-home__container {
+    margin-top: -100px; }
+    .guest-home__container--text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; }
+    .guest-home__container--button {
+      display: flex;
+      justify-content: space-between;
+      width: 160px;
+      margin-top: 10px; }
+  .guest-home__header {
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center; }
+  .guest-home__subheader {
+    font-size: 1.5em;
+    text-align: center; }
+  .guest-home__button {
+    display: flex;
+    justify-content: center;
+    font-family: "Open Sans", sans-serif;
+    padding: 5px;
+    color: #2f2f2f;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1rem;
+    width: 80px;
+    height: 40px;
+    border: 0.5px solid #55bcc9;
+    background: #55bcc9;
+    transition: 0.3s; }
+    .guest-home__button:hover {
+      cursor: pointer;
+      background: #51b0bc; }

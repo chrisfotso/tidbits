@@ -1,6 +1,7 @@
 async function handleSubmit(url, e) {
   e.preventDefault();
 
+  //$this is bound in whichever component is calling handleSubmit()
   const reqBody = {
     username: this.state.username,
     password: this.state.password

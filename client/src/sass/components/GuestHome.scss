@@ -1,5 +1,64 @@
-.welcomeText {
-  color: red;
-  background: yellow;
-  font-size: 30px;
+.guest-home {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: $main-font;
+  background: $pastel-blue;
+  color: $off-black;
+
+  &__container {
+    margin-top: -100px;
+    &--text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &--button {
+      display: flex;
+      justify-content: space-between;
+      width: 160px;
+      margin-top: 10px;
+    }
+  }
+
+  &__header {
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
+  }
+
+  &__subheader {
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    font-family: $main-font;
+    padding: 5px;
+    color: $off-black;
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.1rem;
+    width: 80px;
+    height: 40px;
+    border: 0.5px solid $pastel-blue;
+    background: $pastel-blue;
+    transition: 0.3s;
+
+    &:hover {
+      cursor: pointer;
+      background: #51b0bc;
+    }
+
+    &--login {
+    }
+
+    &--register {
+    }
+  }
 }
