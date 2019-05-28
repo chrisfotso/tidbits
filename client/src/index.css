@@ -83,3 +83,38 @@
     margin-top: 20px; }
     .register__submit:hover {
       cursor: pointer; }
+
+.login {
+  display: flex;
+  justify-content: center;
+  font-family: "Open Sans", sans-serif;
+  color: #2f2f2f;
+  background: #55bcc9;
+  height: 100vh; }
+  .login__container {
+    margin-top: 50px;
+    padding: 20px;
+    background: #fdfdfd;
+    height: 75%;
+    width: 33%; }
+    .login__container > hr {
+      margin-top: 20px; }
+    @media (max-width: 500px) {
+      .login__container {
+        width: 80%; } }
+  .login__header {
+    text-align: center; }
+  .login__form {
+    display: flex;
+    flex-direction: column; }
+  .login__label {
+    font-weight: bold;
+    margin-top: 20px; }
+  .login__input {
+    height: 50px; }
+  .login__submit {
+    color: #2f2f2f;
+    font-family: "Open Sans", sans-serif;
+    margin-top: 20px; }
+    .login__submit:hover {
+      cursor: pointer; }

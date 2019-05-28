@@ -1,0 +1,52 @@
+.login {
+  display: flex;
+  justify-content: center;
+  font-family: $main-font;
+  color: $off-black;
+  background: $pastel-blue;
+  height: 100vh;
+
+  &__container {
+    margin-top: 50px;
+    padding: 20px;
+    background: $off-white;
+    height: 75%;
+    width: 33%;
+
+    & > hr {
+      margin-top: 20px;
+    }
+
+    @media (max-width: 500px) {
+      width: 80%;
+    }
+  }
+
+  &__header {
+    text-align: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    font-weight: bold;
+    margin-top: 20px;
+  }
+
+  &__input {
+    height: 50px;
+  }
+
+  &__submit {
+    color: $off-black;
+    font-family: $main-font;
+    margin-top: 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

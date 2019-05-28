@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from "react";
+import React, { Component } from "react";
 
 import handleInputChange from "../../handlers/handleInputChange";
 import handleLoginRegisterSubmit from "../../handlers/handleLoginRegisterSubmit";
@@ -17,30 +17,39 @@ class Login extends Component {
 
   render() {
     return (
-      <Fragment>
-        <div>Login</div>
-        <form onSubmit={this.boundSubmit}>
-          <label htmlFor="username">Username</label>
-          <br />
-          <input
-            type="text"
-            name="username"
-            id="0"
-            onChange={this.handleInputChange}
-          />
-          <br />
-          <label htmlFor="password">Password</label>
-          <br />
-          <input
-            type="password"
-            name="password"
-            id="0"
-            onChange={this.handleInputChange}
-          />
-          <br />
-          <input type="submit" value="Submit" />
-        </form>
-      </Fragment>
+      <div className="login">
+        <div className="login__container">
+          <h2 className="login__header">Log In</h2>
+          <hr />
+          <form className="login__form" onSubmit={this.boundSubmit}>
+            <label
+              htmlFor="username"
+              className="login__label login__label--username"
+            >
+              Username
+            </label>
+            <input
+              type="text"
+              name="username"
+              className="login__input login__input--username"
+              onChange={this.handleInputChange}
+            />
+            <label
+              htmlFor="password"
+              className="login__label login__label--password"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              className="login__input login__input--password"
+              onChange={this.handleInputChange}
+            />
+            <input type="submit" value="Submit" className="login__submit" />
+          </form>
+        </div>
+      </div>
     );
   }
 }
