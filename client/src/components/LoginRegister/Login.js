@@ -15,13 +15,19 @@ class Login extends Component {
     this.handleInputChange = handleInputChange.bind(this);
   }
 
+  handleLogin = async e => {
+    e.preventDefault();
+    const { token } = await this.boundSubmit(e);
+    this.props.setJwtToken(token);
+  };
+
   render() {
     return (
       <div className="login">
         <div className="login__container">
           <h2 className="login__header">Log In</h2>
           <hr />
-          <form className="login__form" onSubmit={this.boundSubmit}>
+          <form className="login__form" onSubmit={this.handleLogin}>
             <label
               htmlFor="username"
               className="login__label login__label--username"
