@@ -12,16 +12,18 @@ const Login = props => {
   const handleLogin = async event => {
     event.preventDefault();
 
-    const { token } = await handleLoginRegisterSubmit(
+    const { token: generatedToken } = await handleLoginRegisterSubmit(
       "/user/login",
       credentialsObj,
       event
     );
 
-    if (token !== undefined) {
-      props.setJwtToken(token);
-      return props.history.push("/");
-    }
+    props.setJwtToken(prevToken => {
+      if (generatedToken === undefined) return prevToken;
+      else return generatedToken;
+    });
+
+    if (generatedToken !== undefined) return props.history.push("/");
 
     return;
   };
