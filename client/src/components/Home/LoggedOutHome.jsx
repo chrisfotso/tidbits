@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const GuestHome = props => {
-  const loggedOutView = (
+const LoggedOutHome = props => {
+  return (
     <div className="guest-home">
       <div className="guest-home__container guest-home__container--text">
         <div className="guest-home__header">Tidbits</div>
@@ -23,12 +23,6 @@ const GuestHome = props => {
       </div>
     </div>
   );
-
-  const loggedInView = <h1>You are logged in!</h1>;
-
-  if (props.jwtAuthToken) {
-    return loggedInView;
-  } else return loggedOutView;
 };
 
-export default GuestHome;
+export default LoggedOutHome;

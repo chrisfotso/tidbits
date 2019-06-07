@@ -1,4 +1,5 @@
 async function handleSubmit(url, obj, e) {
+  console.log(obj);
   e.preventDefault();
 
   //$this is bound in whichever component is calling handleSubmit()
@@ -25,7 +26,7 @@ async function handleSubmit(url, obj, e) {
 
   const response = await fetch(url, fetchOptions);
   const data = await response.json();
-
+  console.log(data);
   return data;
 }
 
