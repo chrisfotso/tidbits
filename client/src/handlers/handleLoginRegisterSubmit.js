@@ -1,8 +1,8 @@
-async function handleSubmit(url, e) {
+async function handleSubmit(url, obj, e) {
   e.preventDefault();
 
   //$this is bound in whichever component is calling handleSubmit()
-  const { username, password, password2 } = this.state;
+  const { username, password, password2 } = obj;
 
   if (password2 && password !== password2) {
     alert(`Passwords do not match`);
@@ -25,7 +25,7 @@ async function handleSubmit(url, e) {
 
   const response = await fetch(url, fetchOptions);
   const data = await response.json();
-  console.log(data);
+
   return data;
 }
 

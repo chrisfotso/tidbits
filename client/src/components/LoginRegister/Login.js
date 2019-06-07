@@ -1,63 +1,66 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 import handleInputChange from "../../handlers/handleInputChange";
 import handleLoginRegisterSubmit from "../../handlers/handleLoginRegisterSubmit";
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: ""
-    };
+const Login = props => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    this.boundSubmit = handleLoginRegisterSubmit.bind(this, "/user/login");
-    this.handleInputChange = handleInputChange.bind(this);
-  }
+  const credentialsObj = { username, password };
 
-  handleLogin = async e => {
-    e.preventDefault();
-    const { token } = await this.boundSubmit(e);
-    this.props.setJwtToken(token);
+  const handleLogin = async event => {
+    event.preventDefault();
+
+    const { token } = await handleLoginRegisterSubmit(
+      "/user/login",
+      credentialsObj,
+      event
+    );
+
+    if (token !== undefined) {
+      props.setJwtToken(token);
+      return props.history.push("/");
+    }
+
+    return;
   };
 
-  render() {
-    return (
-      <div className="login">
-        <div className="login__container">
-          <h2 className="login__header">Log In</h2>
-          <hr />
-          <form className="login__form" onSubmit={this.handleLogin}>
-            <label
-              htmlFor="username"
-              className="login__label login__label--username"
-            >
-              Username
-            </label>
-            <input
-              type="text"
-              name="username"
-              className="login__input login__input--username"
-              onChange={this.handleInputChange}
-            />
-            <label
-              htmlFor="password"
-              className="login__label login__label--password"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              className="login__input login__input--password"
-              onChange={this.handleInputChange}
-            />
-            <input type="submit" value="Submit" className="login__submit" />
-          </form>
-        </div>
+  return (
+    <div className="login">
+      <div className="login__container">
+        <h2 className="login__header">Log In</h2>
+        <hr />
+        <form className="login__form" onSubmit={handleLogin}>
+          <label
+            htmlFor="username"
+            className="login__label login__label--username"
+          >
+            Username
+          </label>
+          <input
+            type="text"
+            name="username"
+            className="login__input login__input--username"
+            onChange={e => handleInputChange(setUsername, e)}
+          />
+          <label
+            htmlFor="password"
+            className="login__label login__label--password"
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            className="login__input login__input--password"
+            onChange={e => handleInputChange(setPassword, e)}
+          />
+          <input type="submit" value="Submit" className="login__submit" />
+        </form>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Login;

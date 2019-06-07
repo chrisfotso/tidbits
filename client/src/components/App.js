@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 
 import Login from "./LoginRegister/Login";
@@ -7,9 +7,14 @@ import GuestHome from "./GuestHome/GuestHome";
 
 const App = () => {
   const [jwtAuthToken, setJwtToken] = useState("");
+
   return (
     <Router>
-      <Route exact path="/" component={GuestHome} />
+      <Route
+        exact
+        path="/"
+        render={props => <GuestHome {...props} jwtAuthToken={jwtAuthToken} />}
+      />
       <Route
         exact
         path="/login"

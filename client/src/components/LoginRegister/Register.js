@@ -1,70 +1,69 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
 import handleInputChange from "../../handlers/handleInputChange";
-import handleLoginRegisterSubmit from "../../handlers/handleLoginRegisterSubmit";
+import handleSubmit from "../../handlers/handleLoginRegisterSubmit";
 
-class Register extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: "",
-      password: "",
-      password2: ""
-    };
+const Register = props => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
 
-    this.boundSubmit = handleLoginRegisterSubmit.bind(this, "/user/register");
-    this.handleInputChange = handleInputChange.bind(this);
-  }
+  const credentialsObj = {
+    username,
+    password,
+    password2
+  };
 
-  render() {
-    return (
-      <div className="register">
-        <div className="register__container">
-          <h2 className="register__header">Sign Up</h2>
-          <hr />
-          <form className="register__form" onSubmit={this.boundSubmit}>
-            <label
-              htmlFor="username"
-              className="register__label register__label--username"
-            >
-              Username
-            </label>
-            <input
-              type="text"
-              name="username"
-              className="register__input register__input--username"
-              onChange={this.handleInputChange}
-            />
-            <label
-              htmlFor="password"
-              className="register__label register__label--password"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              className="register__input register__input--password"
-              onChange={this.handleInputChange}
-            />
-            <label
-              htmlFor="password2"
-              className="register__label register__label--password"
-            >
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              name="password2"
-              className="register__input register__input--password"
-              onChange={this.handleInputChange}
-            />
-            <input type="submit" value="Submit" className="register__submit" />
-          </form>
-        </div>
+  return (
+    <div className="register">
+      <div className="register__container">
+        <h2 className="register__header">Sign Up</h2>
+        <hr />
+        <form
+          className="register__form"
+          onSubmit={e => handleSubmit("/user/register", credentialsObj, e)}
+        >
+          <label
+            htmlFor="username"
+            className="register__label register__label--username"
+          >
+            Username
+          </label>
+          <input
+            type="text"
+            name="username"
+            className="register__input register__input--username"
+            onChange={e => handleInputChange(setUsername, e)}
+          />
+          <label
+            htmlFor="password"
+            className="register__label register__label--password"
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            className="register__input register__input--password"
+            onChange={e => handleInputChange(setPassword, e)}
+          />
+          <label
+            htmlFor="password2"
+            className="register__label register__label--password"
+          >
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            name="password2"
+            className="register__input register__input--password"
+            onChange={e => handleInputChange(setPassword2, e)}
+          />
+          <input type="submit" value="Submit" className="register__submit" />
+        </form>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Register;
