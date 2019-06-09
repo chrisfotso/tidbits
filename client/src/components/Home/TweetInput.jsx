@@ -8,8 +8,12 @@ const TweetInput = () => {
     const { value } = e.target;
     const { length } = value;
 
-    setCharsRemaining(140 - length);
-    setTweetText(value);
+    if (140 - length < 0) {
+      setCharsRemaining(0);
+    } else {
+      setCharsRemaining(140 - length);
+      setTweetText(value);
+    }
   };
 
   return (

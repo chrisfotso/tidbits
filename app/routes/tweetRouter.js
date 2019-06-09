@@ -9,6 +9,7 @@ const { createTweet } = require("../middlewares/tweetMiddleware");
 //GET endpoint for retrieving all tweets
 router.get("/all", async (req, res) => {
   const allTweets = await Tweet.find({})
+    .sort({ date: -1 })
     .populate("tweeter", "username")
     .exec();
 
