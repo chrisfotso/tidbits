@@ -11,10 +11,37 @@
 }
 
 .tweets-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
   width: 40%;
 
+  > .tweet {
+    width: 100%;
+  }
+
   @media (max-width: 620px) {
     width: 90%;
+  }
+}
+
+.tweet-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 70%;
+
+  &__input {
+    height: 50px;
+    width: 50%;
+    @media (max-width: 620px) {
+      width: 90%;
+    }
+  }
+
+  &__chars {
+    margin-left: 10px;
   }
 }

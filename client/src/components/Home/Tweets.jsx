@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Tweet from "./Tweet";
+import TweetInput from "./TweetInput";
 
 import dummyTweets from "../../dummyTweets";
 
@@ -26,6 +27,7 @@ const Tweets = () => {
   } else
     return (
       <div className="tweets-container">
+        <TweetInput />
         {tweets.map(({ tweeter, text }, index) => (
           <Tweet tweeter={tweeter.username} text={text} key={index} />
         ))}

@@ -152,8 +152,28 @@
   align-items: center; }
 
 .tweets-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 20px;
   width: 40%; }
+  .tweets-container > .tweet {
+    width: 100%; }
   @media (max-width: 620px) {
     .tweets-container {
       width: 90%; } }
+
+.tweet-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 70%; }
+  .tweet-input__input {
+    height: 50px;
+    width: 50%; }
+    @media (max-width: 620px) {
+      .tweet-input__input {
+        width: 90%; } }
+  .tweet-input__chars {
+    margin-left: 10px; }
