@@ -118,3 +118,42 @@
     margin-top: 20px; }
     .login__submit:hover {
       cursor: pointer; }
+
+.tweet {
+  display: flex;
+  justify-content: flex-start;
+  background: #fdfdfd;
+  color: #2f2f2f;
+  border: 1px solid black;
+  padding: 20px;
+  height: 120px;
+  margin-bottom: 10px; }
+  .tweet__icon {
+    height: 90%;
+    width: auto;
+    border: 1px solid #2f2f2f;
+    border-radius: 50%; }
+  .tweet__info {
+    display: flex;
+    margin-left: 10px;
+    flex-direction: column; }
+  .tweet__tweeter {
+    font-weight: bold; }
+
+.dashboard {
+  min-height: 100vh;
+  max-height: 100%;
+  min-width: 100vw;
+  max-width: 100%;
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  background: #55bcc9;
+  align-items: center; }
+
+.tweets-container {
+  margin-top: 20px;
+  width: 40%; }
+  @media (max-width: 620px) {
+    .tweets-container {
+      width: 90%; } }

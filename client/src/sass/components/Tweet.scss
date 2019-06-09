@@ -1,0 +1,31 @@
+.tweet {
+  display: flex;
+  justify-content: flex-start;
+  background: $off-white;
+  color: $off-black;
+  border: 1px solid black;
+  padding: 20px;
+  height: 120px;
+  margin-bottom: 10px;
+
+  &__icon {
+    height: 90%;
+    width: auto;
+    border: 1px solid $off-black;
+    border-radius: 50%;
+
+    &-container {
+      // border: 0.5px solid $off-black;
+    }
+  }
+
+  &__info {
+    display: flex;
+    margin-left: 10px;
+    flex-direction: column;
+  }
+
+  &__tweeter {
+    font-weight: bold;
+  }
+}

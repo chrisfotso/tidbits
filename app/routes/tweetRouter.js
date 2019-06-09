@@ -6,6 +6,15 @@ const Tweet = require("../models/Tweet");
 const { verifyToken } = require("../middlewares/jwtMiddleware");
 const { createTweet } = require("../middlewares/tweetMiddleware");
 
+//GET endpoint for retrieving all tweets
+router.get("/all", async (req, res) => {
+  const allTweets = await Tweet.find({})
+    .populate("tweeter", "username")
+    .exec();
+
+  return res.status(200).send(allTweets);
+});
+
 //GET endpoint for retrieving a tweet
 router.get("/:id", async (req, res) => {
   const { id: tweetId } = req.params;
