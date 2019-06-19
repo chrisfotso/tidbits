@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import handleInputChange from "../../handlers/handleInputChange";
-import handleLoginRegisterSubmit from "../../handlers/handleLoginRegisterSubmit";
+import handleSubmit from "../../handlers/handleLoginRegisterSubmit";
 
 const Login = props => {
   const [username, setUsername] = useState("");
@@ -18,7 +18,7 @@ const Login = props => {
     event.preventDefault();
 
     //Destructuring the generated JWT token from the return value of handleLoginRegisterSubmit()
-    const { token: generatedToken, err } = await handleLoginRegisterSubmit(
+    const { token: generatedToken, err } = await handleSubmit(
       "/user/login",
       credentialsObj,
       event
@@ -30,7 +30,7 @@ const Login = props => {
 
     //This is the logic that is specific to the login component;
     //Updating the JWT token in state and redirecting to the dashboard/home page
-    if (generatedToken !== undefined) {
+    if (generatedToken) {
       setJwtToken(generatedToken);
       return props.history.push("/");
     }

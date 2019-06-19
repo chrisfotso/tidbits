@@ -6,8 +6,7 @@ async function handleSubmit(url, obj, e) {
   const { username, password, password2 } = obj;
 
   if (password2 && password !== password2) {
-    alert(`Passwords do not match`);
-    return false;
+    return { err: "Passwords do not match" };
   }
 
   const reqBody = {

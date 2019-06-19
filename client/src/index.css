@@ -67,6 +67,10 @@
     @media (max-width: 500px) {
       .register__container {
         width: 80%; } }
+  .register__error {
+    font-weight: bold;
+    color: red;
+    text-align: center; }
   .register__header {
     text-align: center; }
   .register__form {
