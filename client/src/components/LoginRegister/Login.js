@@ -6,20 +6,26 @@ import handleLoginRegisterSubmit from "../../handlers/handleLoginRegisterSubmit"
 const Login = props => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState("");
 
   const { setJwtToken } = props;
 
   const credentialsObj = { username, password };
 
+  // Since handleLoginRegisterSubmit() is used for both the Login and Register components,
+  // I have to separate logic meant for only the Login component into its own function
   const handleLogin = async event => {
     event.preventDefault();
 
-    const { token: generatedToken } = await handleLoginRegisterSubmit(
+    //Destructuring the generated JWT token from the return value of handleLoginRegisterSubmit()
+    const { token: generatedToken, err } = await handleLoginRegisterSubmit(
       "/user/login",
       credentialsObj,
       event
     );
 
+    //This is the logic that is specific to the login component;
+    //Updating the JWT token in state and redirecting to the dashboard/home page
     if (generatedToken !== undefined) {
       setJwtToken(generatedToken);
       return props.history.push("/");
@@ -33,6 +39,7 @@ const Login = props => {
       <div className="login__container">
         <h2 className="login__header">Log In</h2>
         <hr />
+        {}
         <form className="login__form" onSubmit={handleLogin}>
           <label
             htmlFor="username"

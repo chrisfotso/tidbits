@@ -42,6 +42,7 @@ const Tweets = props => {
     return (
       <div className="tweets-container">
         <TweetInput jwtAuthToken={jwtAuthToken} setIsLoading={setIsLoading} />
+        {/* Destructuring the tweeter and text properties from each tweet document */}
         {tweets.map(({ tweeter, text }, index) => (
           <Tweet tweeter={tweeter.username} text={text} key={index} />
         ))}
