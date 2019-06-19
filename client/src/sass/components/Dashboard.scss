@@ -21,7 +21,7 @@
     width: 100%;
   }
 
-  @media (max-width: 620px) {
+  @media (max-width: 650px) {
     width: 90%;
   }
 }
@@ -36,7 +36,8 @@
   &__input {
     height: 50px;
     width: 50%;
-    @media (max-width: 620px) {
+
+    @media (max-width: 650px) {
       width: 90%;
     }
   }

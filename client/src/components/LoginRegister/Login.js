@@ -7,6 +7,8 @@ const Login = props => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const { setJwtToken } = props;
+
   const credentialsObj = { username, password };
 
   const handleLogin = async event => {
@@ -18,12 +20,10 @@ const Login = props => {
       event
     );
 
-    props.setJwtToken(prevToken => {
-      if (generatedToken === undefined) return prevToken;
-      else return generatedToken;
-    });
-
-    if (generatedToken !== undefined) return props.history.push("/");
+    if (generatedToken !== undefined) {
+      setJwtToken(generatedToken);
+      return props.history.push("/");
+    }
 
     return;
   };

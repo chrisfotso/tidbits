@@ -4,11 +4,11 @@ import Avatar from "../../download.png";
 const Tweet = props => {
   return (
     <div className="tweet">
-      <img className="tweet__icon" src={Avatar} alt="Profile picture" />
-      <span className="tweet__info">
-        <span className="tweet__tweeter">{props.tweeter}</span>
-        <span className="tweet__text">{props.text}</span>
-      </span>
+      <div className="tweet__user-info">
+        <img className="tweet__icon" src={Avatar} alt="Profile picture" />
+        <div className="tweet__tweeter">{props.tweeter}</div>
+      </div>
+      <p className="tweet__text">{props.text}</p>
     </div>
   );
 };
