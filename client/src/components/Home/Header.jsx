@@ -12,9 +12,9 @@ const Header = props => {
   window.addEventListener("scroll", () => {
     const headerElem = document.querySelector(".dashboard__header");
 
-    if (window.scrollY > 50) {
+    if (headerElem && window.scrollY > 50) {
       headerElem.classList.add("dashboard__header--scrolled");
-    } else {
+    } else if (headerElem) {
       headerElem.classList.remove("dashboard__header--scrolled");
     }
   });

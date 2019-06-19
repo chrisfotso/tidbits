@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 
 import Login from "./LoginRegister/Login";
-import Register from "./LoginRegister/Register";
+import Register, { RegisterSuccess } from "./LoginRegister/Register";
 import Home from "./Home/Home";
 
 const App = () => {
@@ -34,6 +34,7 @@ const App = () => {
           />
         )}
       />
+      <Route exact path="/register/success" component={RegisterSuccess} />
       <Route exact path="/register" component={Register} />
     </Router>
   );

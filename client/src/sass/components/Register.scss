@@ -6,6 +6,31 @@
   background: $pastel-blue;
   height: 100vh;
 
+  &__success {
+    display: flex;
+    justify-content: center;
+    font-family: $main-font;
+    color: $off-black;
+    background: $pastel-blue;
+    height: 100vh;
+
+    &-message {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      margin-top: 50px;
+      padding: 20px;
+      background: $off-white;
+      height: 200px;
+      width: 33%;
+
+      @media (max-width: 500px) {
+        width: 80%;
+      }
+    }
+  }
+
   &__container {
     margin-top: 50px;
     padding: 20px;
