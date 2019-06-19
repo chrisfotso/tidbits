@@ -12,6 +12,8 @@ const Header = props => {
   window.addEventListener("scroll", () => {
     const headerElem = document.querySelector(".dashboard__header");
 
+    //For some reason if a user clicks the logout button, an error is thrown about how headerElem is not defined
+    //So I'm checking to make sure if headerElem exists, then doing the scroll check afterwards
     if (headerElem && window.scrollY > 50) {
       headerElem.classList.add("dashboard__header--scrolled");
     } else if (headerElem) {

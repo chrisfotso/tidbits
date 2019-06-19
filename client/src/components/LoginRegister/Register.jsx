@@ -25,6 +25,9 @@ const Register = props => {
       event
     );
 
+    //Return value of handleSubmit() can either be undefined or a user object
+    //If it's a user object, the return value will have a username property
+    //Else I know that an error was thrown
     if (registerReturnValue && registerReturnValue.username) {
       history.push("/register/success");
     }
@@ -87,6 +90,7 @@ export const RegisterSuccess = props => {
 
   useEffect(() => {
     const redirectInterval = setInterval(() => {
+      //Counting down seconds remaining from 5 secs
       setSecondsRemaining(currSecs => currSecs - 1000);
     }, 1000);
 
@@ -95,8 +99,10 @@ export const RegisterSuccess = props => {
     };
   }, []);
 
+  //Redirecting to login page when countdown is finished
   if (secondsRemaining === 0) {
     history.push("/login");
+    return null;
   }
 
   return (

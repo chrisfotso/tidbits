@@ -6,7 +6,6 @@ import Tweets from "./Tweets";
 
 const LoggedInHome = props => {
   const { jwtAuthToken, setJwtToken, history } = props;
-
   const [isLoading, setIsLoading] = useState(true);
 
   return (
