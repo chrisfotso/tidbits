@@ -2,7 +2,7 @@ const User = require("../models/User");
 const Tweet = require("../models/Tweet");
 
 module.exports.createTweet = async (req, res, next) => {
-  //Destructuring: jwtUser was added to req in verifyToken middleware, text is from req body
+  //Destructuring: jwtUser was added to req object in verifyToken middleware, text is from req body
   const {
     jwtUser,
     body: { text }

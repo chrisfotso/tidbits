@@ -7,26 +7,29 @@ import dummyTweets from "../../dummyTweets";
 
 const Tweets = props => {
   const [tweets, setTweets] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+
+  const { jwtAuthToken, isLoading, setIsLoading } = props;
 
   useEffect(() => {
+    //The function callback to useEffect is synchronous, so I have to define an async function inside of the effect and call it
     const getTweets = async () => {
       const fetchOptions = {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${props.jwtAuthToken}`,
+          Authorization: `Bearer ${jwtAuthToken}`, //Setting authorization header to include the JWT token passed through props
           "Content-Type": "application/json"
         }
       };
 
       const data = await fetch("/tweet/all", fetchOptions);
       const retrievedTweets = await data.json();
+
       setTweets(retrievedTweets);
       setIsLoading(false);
     };
 
     getTweets();
-  }, []);
+  }, [isLoading]);
 
   const LoadingComponent = () => <div className="loading">Loading</div>;
 
@@ -35,7 +38,7 @@ const Tweets = props => {
   } else
     return (
       <div className="tweets-container">
-        <TweetInput />
+        <TweetInput jwtAuthToken={jwtAuthToken} setIsLoading={setIsLoading} />
         {tweets.map(({ tweeter, text }, index) => (
           <Tweet tweeter={tweeter.username} text={text} key={index} />
         ))}

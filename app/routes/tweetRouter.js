@@ -17,7 +17,7 @@ router.get("/all", verifyToken, async (req, res) => {
 });
 
 //GET endpoint for retrieving a tweet
-router.get("/:id", async (req, res) => {
+router.get("/:id", verifyToken, async (req, res) => {
   const { id: tweetId } = req.params;
   const retrievedTweet = await Tweet.findOne({ tweetId }).exec();
 
