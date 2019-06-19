@@ -7,9 +7,9 @@ const { verifyToken } = require("../middlewares/jwtMiddleware");
 const { createTweet } = require("../middlewares/tweetMiddleware");
 
 //GET endpoint for retrieving all tweets
-router.get("/all", async (req, res) => {
+router.get("/all", verifyToken, async (req, res) => {
   const allTweets = await Tweet.find({})
-    .sort({ date: -1 })
+    .sort({ date: -1 }) //Returns newest tweets first
     .populate("tweeter", "username")
     .exec();
 

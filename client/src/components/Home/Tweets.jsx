@@ -5,13 +5,21 @@ import TweetInput from "./TweetInput";
 
 import dummyTweets from "../../dummyTweets";
 
-const Tweets = () => {
+const Tweets = props => {
   const [tweets, setTweets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getTweets = async () => {
-      const data = await fetch("/tweet/all");
+      const fetchOptions = {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${props.jwtAuthToken}`,
+          "Content-Type": "application/json"
+        }
+      };
+
+      const data = await fetch("/tweet/all", fetchOptions);
       const retrievedTweets = await data.json();
       setTweets(retrievedTweets);
       setIsLoading(false);

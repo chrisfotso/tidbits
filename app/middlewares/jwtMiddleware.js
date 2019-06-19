@@ -7,7 +7,7 @@ module.exports.verifyToken = (req, res, next) => {
   if (!authHeader) {
     return res
       .status(403)
-      .send({ msg: "No authorization header sent in request" });
+      .send({ err: "No authorization header sent in request" });
   }
 
   const authBearerToken = authHeader.split(" ")[1];
@@ -15,12 +15,14 @@ module.exports.verifyToken = (req, res, next) => {
   if (!authBearerToken) {
     return res
       .status(400)
-      .send({ msg: "No token sent in authorization header" });
+      .send({ err: "No token sent in authorization header" });
   }
 
-  const decodedPayload = jwt.verify(authBearerToken, JWT_SECRET);
-
-  req.jwtUser = decodedPayload;
-
-  next();
+  try {
+    const decodedPayload = jwt.verify(authBearerToken, JWT_SECRET);
+    req.jwtUser = decodedPayload;
+    next();
+  } catch (err) {
+    return res.status(500).send({ err });
+  }
 };

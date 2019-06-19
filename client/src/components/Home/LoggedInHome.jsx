@@ -5,9 +5,11 @@ import Dashboard from "./Dashboard";
 import Tweets from "./Tweets";
 
 const LoggedInHome = props => {
+  const { jwtAuthToken } = props;
+
   return (
     <Dashboard>
-      <Tweets />
+      <Tweets jwtAuthToken={jwtAuthToken} />
     </Dashboard>
   );
 };
