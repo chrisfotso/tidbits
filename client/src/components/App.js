@@ -13,7 +13,9 @@ const App = () => {
       <Route
         exact
         path="/"
-        render={props => (
+        render={(
+          props //Using a render function because I want to pass additional props to the rendered component
+        ) => (
           <Home
             {...props}
             jwtAuthToken={jwtAuthToken}

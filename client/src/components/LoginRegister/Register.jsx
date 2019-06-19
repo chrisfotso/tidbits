@@ -15,15 +15,8 @@ const Register = props => {
     password2
   };
 
-  const handleRegister = async event => {
-    event.preventDefault();
-
-    const { err } = await handleSubmit("/user/register", credentialsObj, event);
-
-    if (err) {
-      //Handling any error returned by handleSubmit()
-      return setRegisterError(err);
-    }
+  const handleRegister = event => {
+    handleSubmit("/user/register", credentialsObj, setRegisterError, event);
   };
 
   return (

@@ -17,21 +17,19 @@ const Login = props => {
   const handleLogin = async event => {
     event.preventDefault();
 
-    //Destructuring the generated JWT token from the return value of handleSubmit()
-    const { token: generatedToken, err } = await handleSubmit(
+    const loginReturnValue = await handleSubmit(
       "/user/login",
       credentialsObj,
+      setLoginError,
       event
     );
 
-    if (err) {
-      setLoginError(err);
-    }
-
-    //This is the logic that is specific to the login component;
-    //Updating the JWT token in state and redirecting to the dashboard/home page
-    if (generatedToken) {
-      setJwtToken(generatedToken);
+    //handleSubmit() can either return undefined or a data object
+    //So I have to make sure the return value is truthy
+    if (loginReturnValue && loginReturnValue.token) {
+      //This is the logic that is specific to the login component;
+      //Updating the JWT token in state and redirecting to the dashboard/home page
+      setJwtToken(loginReturnValue.token);
       return props.history.push("/");
     }
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { set } from "mongoose";
 
 const TweetInput = props => {
   const [tweetText, setTweetText] = useState("");
@@ -36,8 +35,6 @@ const TweetInput = props => {
 
     const data = await fetch("/tweet/new", fetchOptions);
     const result = await data.json();
-
-    console.log(result);
 
     setTweetText("");
     setCharsRemaining(140);

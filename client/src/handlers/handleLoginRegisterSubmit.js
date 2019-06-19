@@ -1,12 +1,13 @@
-async function handleSubmit(url, obj, e) {
-  console.log(obj);
-  e.preventDefault();
+//Parameter 'url' is the URL you want to post to: either /user/login or /user/register
+//Parameter 'infoObj' is an object that contains information you want to put in the body of the request; username, password
+//Parameter 'errorHandlerFunc' is a function meant to update the state of its respective component if there are any errors so the errors can be displayed to the user
+async function handleSubmit(url, infoObj, errorHandlerFunc, event) {
+  event.preventDefault();
 
-  //$this is bound in whichever component is calling handleSubmit()
-  const { username, password, password2 } = obj;
+  const { username, password, password2 } = infoObj;
 
   if (password2 && password !== password2) {
-    return { err: "Passwords do not match" };
+    return errorHandlerFunc("Passwords do not match");
   }
 
   const reqBody = {
@@ -25,8 +26,10 @@ async function handleSubmit(url, obj, e) {
 
   const response = await fetch(url, fetchOptions);
   const data = await response.json();
-  console.log(data);
-  return data;
+
+  if (data.err) {
+    errorHandlerFunc(data.err);
+  } else return data;
 }
 
 export default handleSubmit;
