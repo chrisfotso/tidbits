@@ -9,7 +9,7 @@ const TweetInput = props => {
 
   const handleChange = e => {
     const { value } = e.target;
-    const { length } = value; //event.target.length — the length of the text in the textarea
+    const { length } = value; //The length of the text in the textarea
 
     if (140 - length < 0) {
       setCharsRemaining(0); //Ensuring the character counter doesn't go below zero
