@@ -11,24 +11,27 @@ const Tweets = props => {
   const { jwtAuthToken, isLoading, setIsLoading } = props;
 
   useEffect(() => {
-    //The function callback to useEffect is synchronous, so I have to define an async function inside of the effect and call it
-    const getTweets = async () => {
-      const fetchOptions = {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${jwtAuthToken}`, //Setting authorization header to include the JWT token passed through props
-          "Content-Type": "application/json"
-        }
-      };
+    const abortController = new AbortController(); //Using abortController for cleanup
 
-      const data = await fetch("/tweet/all", fetchOptions);
-      const retrievedTweets = await data.json();
-
-      setTweets(retrievedTweets);
-      setIsLoading(false);
+    const fetchOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${jwtAuthToken}`, //Setting authorization header to include the JWT token passed through props
+        "Content-Type": "application/json"
+      },
+      signal: abortController.signal
     };
 
-    getTweets();
+    fetch("/tweet/all", fetchOptions)
+      .then(data => data.json())
+      .then(retrievedTweets => {
+        setTweets(retrievedTweets);
+        setIsLoading(false);
+      });
+
+    return function tweetsCleanup() {
+      abortController.abort();
+    };
   }, [isLoading]);
 
   const LoadingComponent = () => <div className="loading">Loading</div>;

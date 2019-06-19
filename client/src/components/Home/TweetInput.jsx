@@ -9,11 +9,11 @@ const TweetInput = props => {
 
   const handleChange = e => {
     const { value } = e.target;
-    const { length } = value; //event.target.length — the length of the text in the input
+    const { length } = value; //event.target.length — the length of the text in the textarea
 
     if (140 - length < 0) {
       setCharsRemaining(0); //Ensuring the character counter doesn't go below zero
-      //Not calling setTweetText() because I don't want the user to type more than 140 chars
+      //Not calling setTweetText() because I don't want the user to be able to type more than 140 chars
     } else {
       setCharsRemaining(140 - length);
       setTweetText(value);
@@ -28,7 +28,7 @@ const TweetInput = props => {
     const fetchOptions = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${jwtAuthToken}`,
+        Authorization: `Bearer ${jwtAuthToken}`, //Putting JWT token in authorization header for verification purposes
         "Content-Type": "application/json"
       },
       body: JSON.stringify(reqBody)
@@ -37,18 +37,13 @@ const TweetInput = props => {
     const data = await fetch("/tweet/new", fetchOptions);
     const result = await data.json();
 
-    console.log(result);
-
     setTweetText("");
     setCharsRemaining(140);
-    setIsLoading(false);
-
-    return result;
   };
 
   return (
     <div className="tweet-input">
-      <input
+      <textarea
         type="text"
         onChange={handleChange}
         value={tweetText}
