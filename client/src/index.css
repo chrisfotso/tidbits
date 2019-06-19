@@ -176,11 +176,17 @@
   align-items: center; }
   .dashboard__header {
     display: flex;
+    opacity: 1;
+    transition: opacity 0.25s;
+    position: sticky;
+    top: 0;
     padding: 5px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     background: #fdfdfd;
     width: 100vw;
     justify-content: space-between; }
+    .dashboard__header--scrolled {
+      opacity: 0.7; }
   .dashboard__title {
     text-align: center; }
   .dashboard__logout {

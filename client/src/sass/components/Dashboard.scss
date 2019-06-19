@@ -11,11 +11,19 @@
 
   &__header {
     display: flex;
+    opacity: 1;
+    transition: opacity 0.25s;
+    position: sticky;
+    top: 0;
     padding: 5px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     background: $off-white;
     width: 100vw;
     justify-content: space-between;
+
+    &--scrolled {
+      opacity: 0.7;
+    }
   }
 
   &__title {
