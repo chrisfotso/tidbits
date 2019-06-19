@@ -24,6 +24,10 @@ const Login = props => {
       event
     );
 
+    if (err) {
+      setLoginError(err);
+    }
+
     //This is the logic that is specific to the login component;
     //Updating the JWT token in state and redirecting to the dashboard/home page
     if (generatedToken !== undefined) {
@@ -39,7 +43,7 @@ const Login = props => {
       <div className="login__container">
         <h2 className="login__header">Log In</h2>
         <hr />
-        {}
+        {loginError && <p className="login__error">{loginError}</p>}
         <form className="login__form" onSubmit={handleLogin}>
           <label
             htmlFor="username"

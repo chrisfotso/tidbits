@@ -22,6 +22,12 @@
     }
   }
 
+  &__error {
+    font-weight: bold;
+    color: red;
+    text-align: center;
+  }
+
   &__header {
     text-align: center;
   }

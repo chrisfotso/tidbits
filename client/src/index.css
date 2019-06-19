@@ -102,6 +102,10 @@
     @media (max-width: 500px) {
       .login__container {
         width: 80%; } }
+  .login__error {
+    font-weight: bold;
+    color: red;
+    text-align: center; }
   .login__header {
     text-align: center; }
   .login__form {
