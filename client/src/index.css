@@ -125,10 +125,10 @@
   justify-content: flex-start;
   background: #fdfdfd;
   color: #2f2f2f;
-  border: 1px solid black;
   padding: 20px;
-  height: 140px;
-  margin-bottom: 10px; }
+  height: auto;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
   .tweet__user-info {
     display: flex;
     align-items: center;
@@ -148,6 +148,7 @@
     margin-left: 10px;
     font-weight: bold; }
   .tweet__text {
+    margin-top: 10px;
     width: 100%;
     overflow-wrap: break-word;
     height: 100%; }

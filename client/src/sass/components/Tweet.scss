@@ -4,10 +4,10 @@
   justify-content: flex-start;
   background: $off-white;
   color: $off-black;
-  border: 1px solid black;
   padding: 20px;
-  height: 140px;
+  height: auto;
   margin-bottom: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
   &__user-info {
     display: flex;
@@ -39,6 +39,7 @@
   }
 
   &__text {
+    margin-top: 10px;
     width: 100%;
     overflow-wrap: break-word;
     height: 100%;
