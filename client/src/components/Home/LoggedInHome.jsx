@@ -5,12 +5,12 @@ import Dashboard from "./Dashboard";
 import Tweets from "./Tweets";
 
 const LoggedInHome = props => {
-  const { jwtAuthToken } = props;
+  const { jwtAuthToken, setJwtToken } = props;
 
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <Dashboard>
+    <Dashboard setJwtToken={setJwtToken}>
       <Tweets
         isLoading={isLoading}
         setIsLoading={setIsLoading}

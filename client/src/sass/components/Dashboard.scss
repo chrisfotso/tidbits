@@ -8,6 +8,23 @@
   flex-direction: column;
   background: $pastel-blue;
   align-items: center;
+
+  &__header {
+    display: flex;
+    padding: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    background: $off-white;
+    width: 100vw;
+    justify-content: space-between;
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__logout {
+    margin-right: 20px;
+  }
 }
 
 .tweets-container {

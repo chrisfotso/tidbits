@@ -13,7 +13,13 @@ const App = () => {
       <Route
         exact
         path="/"
-        render={props => <Home {...props} jwtAuthToken={jwtAuthToken} />}
+        render={props => (
+          <Home
+            {...props}
+            jwtAuthToken={jwtAuthToken}
+            setJwtToken={setJwtToken}
+          />
+        )}
       />
       <Route
         exact
