@@ -3,8 +3,6 @@ import React, { useState, useEffect } from "react";
 import Tweet from "./Tweet";
 import TweetInput from "./TweetInput";
 
-import dummyTweets from "../../dummyTweets";
-
 const Tweets = props => {
   const [tweets, setTweets] = useState([]);
 

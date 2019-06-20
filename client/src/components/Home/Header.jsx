@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Header = props => {
   const { setJwtToken, history } = props;
@@ -9,17 +9,22 @@ const Header = props => {
   };
 
   //Making the header transparent if the user scrolls
-  window.addEventListener("scroll", () => {
+  const handleScroll = () => {
     const headerElem = document.querySelector(".dashboard__header");
-
-    //For some reason if a user clicks the logout button, an error is thrown about how headerElem is not defined
-    //So I'm checking to make sure if headerElem exists, then doing the scroll check afterwards
-    if (headerElem && window.scrollY > 50) {
+    if (window.scrollY > 50) {
       headerElem.classList.add("dashboard__header--scrolled");
-    } else if (headerElem) {
+    } else {
       headerElem.classList.remove("dashboard__header--scrolled");
     }
-  });
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+
+    return function cleanupScroll() {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div className="dashboard__header">
