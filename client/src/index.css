@@ -157,6 +157,8 @@
   height: auto;
   margin-bottom: 5px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
+  .tweet:hover {
+    cursor: pointer; }
   .tweet__user-info {
     display: flex;
     align-items: center;
@@ -175,6 +177,8 @@
   .tweet__tweeter {
     margin-left: 10px;
     font-weight: bold; }
+    .tweet__tweeter:hover {
+      text-decoration: underline; }
   .tweet__text {
     margin-top: 10px;
     width: 100%;

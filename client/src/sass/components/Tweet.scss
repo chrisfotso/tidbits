@@ -9,6 +9,10 @@
   margin-bottom: 5px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
+  &:hover {
+    cursor: pointer;
+  }
+
   &__user-info {
     display: flex;
     align-items: center;
@@ -33,6 +37,10 @@
   &__tweeter {
     margin-left: 10px;
     font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   &__text {

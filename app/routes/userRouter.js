@@ -41,4 +41,19 @@ router.post("/login", verifyLoginInput, async (req, res) => {
   return res.status(200).send({ token });
 });
 
+router.get("/:username", async (req, res) => {
+  const { username: paramUsername } = req.params;
+
+  const retrievedUser = await User.findOne({
+    username: { $regex: new RegExp(paramUsername, "i") }
+  })
+    .populate("tweets")
+    .populate("likes")
+    .populate("following")
+    .populate("followers")
+    .exec();
+
+  res.status(200).send(retrievedUser);
+});
+
 module.exports = router;

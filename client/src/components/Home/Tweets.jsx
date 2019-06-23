@@ -45,8 +45,13 @@ const Tweets = props => {
           url="/tweet/new"
         />
         {/* Destructuring the tweeter and text properties from each tweet document */}
-        {tweets.map(({ tweeter, text, _id }, index) => (
-          <Tweet tweeter={tweeter.username} text={text} key={index} id={_id} />
+        {tweets.map(({ tweeter, text, tweetId }, index) => (
+          <Tweet
+            tweeter={tweeter.username}
+            text={text}
+            key={index}
+            id={tweetId}
+          />
         ))}
       </div>
     );
