@@ -86,7 +86,7 @@ const Register = props => {
 export const RegisterSuccess = props => {
   const { history } = props;
 
-  const [secondsRemaining, setSecondsRemaining] = useState(5000);
+  const [secondsRemaining, setSecondsRemaining] = useState(3000);
 
   useEffect(() => {
     const redirectInterval = setInterval(() => {

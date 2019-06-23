@@ -9,12 +9,12 @@ const Tweets = props => {
   const { jwtAuthToken, isLoading, setIsLoading } = props;
 
   useEffect(() => {
-    const abortController = new AbortController(); //Using abortController for cleanup
+    const abortController = new AbortController(); //Using abortController for cleanup; in case user leaves page while request is in progress
 
     const fetchOptions = {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${jwtAuthToken}`, //Setting authorization header to include the JWT token passed through props
+        Authorization: `Bearer ${jwtAuthToken}`, //Setting bearer authorization header to include the JWT token passed through props
         "Content-Type": "application/json"
       },
       signal: abortController.signal
@@ -39,7 +39,11 @@ const Tweets = props => {
   } else
     return (
       <div className="tweets-container">
-        <TweetInput jwtAuthToken={jwtAuthToken} setIsLoading={setIsLoading} />
+        <TweetInput
+          jwtAuthToken={jwtAuthToken}
+          setIsLoading={setIsLoading}
+          url="/tweet/new"
+        />
         {/* Destructuring the tweeter and text properties from each tweet document */}
         {tweets.map(({ tweeter, text, _id }, index) => (
           <Tweet tweeter={tweeter.username} text={text} key={index} id={_id} />

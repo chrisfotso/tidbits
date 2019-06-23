@@ -5,7 +5,7 @@ const Header = props => {
 
   const handleLogout = () => {
     setJwtToken("");
-    history.push("/login"); //Redirects user to login page when they log out
+    history.push("/"); //Redirects user to login page when they log out
   };
 
   //Making the header transparent if the user scrolls
@@ -18,10 +18,11 @@ const Header = props => {
     }
   };
 
+  //Adds scroll event listener to window and handles cleanup on unmount
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
-    return function cleanupScroll() {
+    return function cleanUpScroll() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);

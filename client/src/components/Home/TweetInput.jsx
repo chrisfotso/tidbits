@@ -4,7 +4,7 @@ const TweetInput = props => {
   const [tweetText, setTweetText] = useState("");
   const [charsRemaining, setCharsRemaining] = useState(140);
 
-  const { jwtAuthToken, setIsLoading } = props;
+  const { jwtAuthToken, setIsLoading, url } = props;
 
   const handleChange = e => {
     const { value } = e.target;
@@ -27,17 +27,19 @@ const TweetInput = props => {
     const fetchOptions = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${jwtAuthToken}`, //Putting JWT token in authorization header for verification purposes
+        Authorization: `Bearer ${jwtAuthToken}`, //Putting JWT token in bearer authorization header for verification purposes
         "Content-Type": "application/json"
       },
       body: JSON.stringify(reqBody)
     };
 
-    const data = await fetch("/tweet/new", fetchOptions);
-    const result = await data.json();
+    const data = await fetch(url, fetchOptions);
 
     setTweetText("");
     setCharsRemaining(140);
+    //Not calling setIsLoading(false) because that happens in the effect of the Tweets component
+    //isLoading is a dependency of the effect in the Tweets component
+    //Since I called setIsLoading(true) at the beginning of this function, the effect in Tweets will fire and eventually call setIsLoading(false);
   };
 
   return (
