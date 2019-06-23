@@ -14,6 +14,8 @@ const LoggedInHome = props => {
         isLoading={isLoading}
         setIsLoading={setIsLoading}
         jwtAuthToken={jwtAuthToken}
+        initialTweets={[]}
+        onHomeScreen={true}
       />
     </Dashboard>
   );

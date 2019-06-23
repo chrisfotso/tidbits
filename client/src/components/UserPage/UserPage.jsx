@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
 
 import Tweet from "../Home/Tweet";
+import Tweets from "../Home/Tweets";
+import Header from "../Home/Header";
 
 import Avatar from "../../download.png";
 
 const UserPage = props => {
-  const { username: paramsUsername } = props.match.params;
+  const {
+    setJwtToken,
+    history,
+    match: {
+      params: { username: paramsUsername }
+    }
+  } = props;
+
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,12 +33,11 @@ const UserPage = props => {
   }
 
   return (
-    <div classname="profile">
+    <div className="profile">
+      <Header setJwtToken={setJwtToken} history={history} />
       <img className="tweet__icon" src={Avatar} alt="Profile picture" />
       <div className="profile__username">{paramsUsername}</div>
-      {user.tweets.map(({ text, tweetId }, index) => (
-        <Tweet tweeter={paramsUsername} text={text} key={index} id={tweetId} />
-      ))}
+      <Tweets initialTweets={user.tweets} onHomeScreen={false} />
     </div>
   );
 };

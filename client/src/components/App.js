@@ -25,7 +25,11 @@ const App = () => {
         />
         <Route exact path="/register/success" component={RegisterSuccess} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/:username" component={UserPage} />
+        <Route
+          exact
+          path="/:username"
+          render={props => <UserPage {...props} setJwtToken={setJwtToken} />}
+        />
         <Route
           exact
           path="/"

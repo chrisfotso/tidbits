@@ -47,7 +47,7 @@ router.get("/:username", async (req, res) => {
   const retrievedUser = await User.findOne({
     username: { $regex: new RegExp(paramUsername, "i") }
   })
-    .populate("tweets")
+    .populate({ path: "tweets", populate: { path: "tweeter" } })
     .populate("likes")
     .populate("following")
     .populate("followers")
