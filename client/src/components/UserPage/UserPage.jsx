@@ -23,7 +23,7 @@ const UserInfo = props => {
           <strong>{followers.length}</strong> followers
         </p>
         <p className="profile__stat">
-          <strong>{followers.length}</strong> following
+          <strong>{following.length}</strong> following
         </p>
       </div>
     </div>
