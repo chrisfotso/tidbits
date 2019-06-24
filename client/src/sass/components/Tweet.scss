@@ -1,11 +1,11 @@
 .tweet {
   display: flex;
+  flex: auto;
   flex-direction: column;
   justify-content: flex-start;
   background: $off-white;
   color: $off-black;
   padding: 20px;
-  height: auto;
   margin-bottom: 5px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
@@ -26,14 +26,6 @@
     border-radius: 50%;
   }
 
-  &__info {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    margin-left: 10px;
-    flex-direction: column;
-  }
-
   &__tweeter {
     margin-left: 10px;
     font-weight: bold;
@@ -47,10 +39,5 @@
     margin-top: 10px;
     width: 100%;
     overflow-wrap: break-word;
-    height: 100%;
-  }
-
-  @media (max-width: 1200px) {
-    height: 200px;
   }
 }

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Header = props => {
   const { setJwtToken, history } = props;
@@ -29,7 +30,9 @@ const Header = props => {
 
   return (
     <div className="dashboard__header">
-      <h1 className="dashboard__title">Tidbits</h1>
+      <Link to="/" style={{ textDecoration: "none", color: "#2f2f2f" }}>
+        <h1 className="dashboard__title">Tidbits</h1>
+      </Link>
       <button onClick={handleLogout} className="dashboard__logout">
         Log out
       </button>

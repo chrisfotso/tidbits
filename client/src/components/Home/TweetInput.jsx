@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const TweetInput = props => {
   const [tweetText, setTweetText] = useState("");
-  const [charsRemaining, setCharsRemaining] = useState(140);
+  const [charsRemaining, setCharsRemaining] = useState(280);
 
   const { jwtAuthToken, setIsLoading, url } = props;
 
@@ -10,11 +10,11 @@ const TweetInput = props => {
     const { value } = e.target;
     const { length } = value; //The length of the text in the textarea
 
-    if (140 - length < 0) {
+    if (280 - length < 0) {
       setCharsRemaining(0); //Ensuring the character counter doesn't go below zero
       //Not calling setTweetText() because I don't want the user to be able to type more than 140 chars
     } else {
-      setCharsRemaining(140 - length);
+      setCharsRemaining(280 - length);
       setTweetText(value);
     }
   };
@@ -44,16 +44,18 @@ const TweetInput = props => {
 
   return (
     <div className="tweet-input">
+      <p className="tweet-input__header">Share a tidbit</p>
       <textarea
         type="text"
         onChange={handleChange}
         value={tweetText}
         name="tweet-input"
-        placeholder="Share a tidbit!"
         id=""
         className="tweet-input__input"
       />
-      <p className="tweet-input__chars">{charsRemaining}</p>
+      <p className="tweet-input__chars">
+        <strong>{charsRemaining}</strong> characters remaining
+      </p>
       <button onClick={handleSendTweet}>Share</button>
     </div>
   );
