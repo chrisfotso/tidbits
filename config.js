@@ -1,3 +1,5 @@
+//When the project is finished, these will, of course, be environment variables
+//Only for the purpose of development
 module.exports = {
   DB_URL:
     "mongodb+srv://chrisadmin:Adminkflowslime17@cluster0-mealh.mongodb.net/test?retryWrites=true",
