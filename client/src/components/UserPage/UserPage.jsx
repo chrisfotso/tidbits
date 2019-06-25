@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
 
-import Tweet from "../Home/Tweet";
 import Tweets from "../Home/Tweets";
 import Header from "../Home/Header";
 
@@ -60,7 +59,7 @@ const UserPage = props => {
         // Using ternary operator to conditionally render based on isLoading
         <LoadingComponent />
       ) : (
-        <>
+        <Fragment>
           <Header setJwtToken={setJwtToken} history={history} />
           <div className="profile__container">
             <UserInfo
@@ -75,7 +74,7 @@ const UserPage = props => {
               history={history}
             />
           </div>
-        </>
+        </Fragment>
       )}
     </div>
   );

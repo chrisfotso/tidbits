@@ -33,7 +33,7 @@ const TweetInput = props => {
       body: JSON.stringify(reqBody)
     };
 
-    const data = await fetch(url, fetchOptions);
+    await fetch(url, fetchOptions);
 
     setTweetText("");
     setCharsRemaining(140);

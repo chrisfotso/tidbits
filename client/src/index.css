@@ -177,6 +177,10 @@
     margin-top: 10px;
     width: 100%;
     overflow-wrap: break-word; }
+  .tweet__buttons {
+    align-self: flex-end; }
+  .tweet__button {
+    margin-right: 10px; }
 
 .dashboard {
   min-height: 100vh;

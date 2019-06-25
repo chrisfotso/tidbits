@@ -38,6 +38,7 @@ const App = () => {
           Component={Home}
           jwtAuthToken={jwtAuthToken}
           setJwtToken={setJwtToken}
+          onHomeScreen={true}
         />
       </Switch>
     </Router>

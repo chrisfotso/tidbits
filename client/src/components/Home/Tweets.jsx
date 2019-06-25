@@ -13,7 +13,7 @@ const Tweets = props => {
     onHomeScreen
   } = props;
 
-  const [tweets, setTweets] = useState(props.initialTweets);
+  const [tweets, setTweets] = useState(initialTweets);
 
   useEffect(() => {
     const abortController = new AbortController(); //Using abortController for cleanup; in case user leaves page while request is in progress
@@ -61,6 +61,7 @@ const Tweets = props => {
         {/* Destructuring the tweeter and text properties from each tweet document */}
         {tweetsToUse.map(({ tweeter, text, tweetId, replies }, index) => (
           <Tweet
+            jwtAuthToken={jwtAuthToken}
             history={history}
             tweeter={tweeter.username}
             replies={replies}

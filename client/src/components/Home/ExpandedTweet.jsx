@@ -26,6 +26,7 @@ const ExpandedTweets = props => {
         Accept: "application/json"
       }
     };
+
     fetch(`/tweet/${tweetId}`, fetchOptions)
       .then(data => data.json())
       .then(retrievedTweet => {
@@ -34,7 +35,7 @@ const ExpandedTweets = props => {
       })
       .finally(() => setIsLoading(false))
       .catch(console.log);
-  }, []);
+  });
 
   if (isLoading)
     return (
@@ -48,6 +49,7 @@ const ExpandedTweets = props => {
       <Header setJwtToken={setJwtToken} history={history} />
       <div className="expanded__container">
         <Tweet
+          jwtAuthToken={jwtAuthToken}
           tweeter={parentTweet.tweeter.username}
           text={parentTweet.text}
           id={parentTweet.tweetId}

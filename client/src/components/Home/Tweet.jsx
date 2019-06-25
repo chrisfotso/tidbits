@@ -1,20 +1,54 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useState } from "react";
+import { Link, Redirect } from "react-router-dom";
 import Avatar from "../../download.png";
 
 import Tweets from "./Tweets";
 
 const Tweet = props => {
+  const [redirectLink, setRedirectLink] = useState("");
+
   const handleTweetClick = e => {
-    if (
-      e.target.classList.contains("tweet__icon") ||
-      e.target.classList.contains("tweet__tweeter")
-    ) {
+    const classNames = [
+      "tweet__icon",
+      "tweet__tweeter",
+      "tweet__reply",
+      "tweet__like"
+    ];
+
+    if (classNames.some(className => e.target.classList.contains(className))) {
       return;
     }
 
-    props.history.push(`/tweet/${props.id}`);
+    setRedirectLink(`/tweet/${props.id}`);
   };
+
+  const handleReplyClick = e => {
+    const newReply = prompt(`Enter your reply to ${props.tweeter}`);
+
+    if (newReply.length > 280) {
+      return alert("Reply must be 280 characters or less");
+    }
+
+    const fetchOptions = {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${props.jwtAuthToken}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ text: newReply })
+    };
+
+    fetch(`/tweet/${props.id}/reply`, fetchOptions)
+      .then(data => data.json())
+      .finally(() => props.history.push(`/tweet/${props.id}`))
+      .catch(console.log);
+  };
+
+  const handleLikeClick = e => console.log("like");
+
+  if (redirectLink) {
+    return <Redirect to={redirectLink} />;
+  }
 
   return (
     <div className="tweet" onClick={handleTweetClick}>
@@ -28,6 +62,17 @@ const Tweet = props => {
         </Link>
       </div>
       <p className="tweet__text">{props.text}</p>
+      <div className="tweet__buttons">
+        <button
+          className="tweet__reply tweet__button"
+          onClick={handleReplyClick}
+        >
+          Reply
+        </button>
+        <button className="tweet__like tweet__button" onClick={handleLikeClick}>
+          Like
+        </button>
+      </div>
     </div>
   );
 };

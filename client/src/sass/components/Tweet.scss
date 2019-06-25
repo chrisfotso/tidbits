@@ -40,4 +40,12 @@
     width: 100%;
     overflow-wrap: break-word;
   }
+
+  &__buttons {
+    align-self: flex-end;
+  }
+
+  &__button {
+    margin-right: 10px;
+  }
 }
