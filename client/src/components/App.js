@@ -6,6 +6,7 @@ import Register, { RegisterSuccess } from "./LoginRegister/Register";
 import Home from "./Home/Home";
 import UserPage from "./UserPage/UserPage";
 import ExpandedTweet from "./Home/ExpandedTweet";
+import RouteWithProps from "./RouteWithProps";
 
 const App = () => {
   const [jwtAuthToken, setJwtToken] = useState("");
@@ -13,43 +14,29 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route
-          exact
+        <RouteWithProps
           path="/login"
-          render={(
-            props //Using a render function because I want to pass additional props to the rendered component
-          ) => (
-            <Login
-              {...props}
-              jwtAuthToken={jwtAuthToken}
-              setJwtToken={setJwtToken}
-            />
-          )}
+          Component={Login}
+          jwtAuthToken={jwtAuthToken}
+          setJwtToken={setJwtToken}
         />
         <Route exact path="/register/success" component={RegisterSuccess} />
         <Route exact path="/register" component={Register} />
-        <Route
-          exact
-          path="/:username"
-          render={props => <UserPage {...props} setJwtToken={setJwtToken} />}
-        />
-        <Route
-          exact
+        <RouteWithProps
           path="/tweet/:tweetId"
-          render={props => (
-            <ExpandedTweet {...props} jwtAuthToken={jwtAuthToken} />
-          )}
+          Component={ExpandedTweet}
+          jwtAuthToken={jwtAuthToken}
         />
-        <Route
-          exact
+        <RouteWithProps
+          path="/:username"
+          Component={UserPage}
+          setJwtToken={setJwtToken}
+        />
+        <RouteWithProps
           path="/"
-          render={props => (
-            <Home
-              {...props}
-              jwtAuthToken={jwtAuthToken}
-              setJwtToken={setJwtToken}
-            />
-          )}
+          Component={Home}
+          jwtAuthToken={jwtAuthToken}
+          setJwtToken={setJwtToken}
         />
       </Switch>
     </Router>
