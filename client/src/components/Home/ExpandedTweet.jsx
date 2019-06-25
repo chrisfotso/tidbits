@@ -35,7 +35,7 @@ const ExpandedTweets = props => {
       })
       .finally(() => setIsLoading(false))
       .catch(console.log);
-  });
+  }, [tweetId, parentTweet, childrenTweets, isLoading]);
 
   if (isLoading)
     return (
