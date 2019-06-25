@@ -36,7 +36,12 @@ const ExpandedTweets = props => {
       .catch(console.log);
   }, []);
 
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading)
+    return (
+      <div className="expanded">
+        <div classname="loading">Loading</div>
+      </div>
+    );
 
   return (
     <div className="expanded">

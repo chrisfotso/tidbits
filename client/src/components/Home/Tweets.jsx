@@ -43,6 +43,9 @@ const Tweets = props => {
 
   const LoadingComponent = () => <div className="loading">Loading</div>;
 
+  const filteredTweets = tweets.filter(tweet => !tweet.isReply); //Filtering out all tweets that are replies to other tweets
+  const tweetsToUse = onHomeScreen ? filteredTweets : tweets; //If I'm on the home screen I don't want to display tweets that are replies
+
   if (isLoading) {
     return <LoadingComponent />;
   } else
@@ -56,7 +59,7 @@ const Tweets = props => {
           />
         )}
         {/* Destructuring the tweeter and text properties from each tweet document */}
-        {tweets.map(({ tweeter, text, tweetId, replies }, index) => (
+        {tweetsToUse.map(({ tweeter, text, tweetId, replies }, index) => (
           <Tweet
             history={history}
             tweeter={tweeter.username}
