@@ -46,7 +46,7 @@ const Tweet = props => {
 
   const handleLikeClick = e => console.log("like");
 
-  if (redirectLink) {
+  if (redirectLink.length) {
     return <Redirect push to={redirectLink} />;
   }
 

@@ -22,7 +22,7 @@ const ExpandedTweets = props => {
     const fetchOptions = {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${jwtAuthToken}`,
+        Authorization: `Bearer ${jwtAuthToken}`, //Putting JWT token in request for verification
         Accept: "application/json"
       }
     };
@@ -30,12 +30,13 @@ const ExpandedTweets = props => {
     fetch(`/tweet/${tweetId}`, fetchOptions)
       .then(data => data.json())
       .then(retrievedTweet => {
+        //Setting state with the retrieved data
         setParentTweet(retrievedTweet);
         setChildrenTweets(retrievedTweet.replies);
       })
       .finally(() => setIsLoading(false))
       .catch(console.log);
-  }, [tweetId, parentTweet, childrenTweets, isLoading]);
+  }, [tweetId, parentTweet, childrenTweets, isLoading]); //Effect only runs if these variables change
 
   if (isLoading)
     return (
