@@ -61,11 +61,7 @@ router.post("/new", verifyToken, createTweet, async (req, res) => {
 
   return res.send({
     msg: "Success: tweet created",
-    savedTweet: {
-      tweetId: savedTweet.tweetId,
-      tweeter: savedTweet.tweeter,
-      text: savedTweet.text
-    }
+    savedTweet
   });
 });
 

@@ -5,8 +5,11 @@ module.exports.createTweet = async (req, res, next) => {
   //Destructuring: jwtUser was added to req object in verifyToken middleware, text is from req body
   const {
     jwtUser,
+    path,
     body: { text }
   } = req;
+
+  let isReply = path === "/new" ? false : true;
 
   //Finding user with username from JWT (case-insensitive regex)
   const retrievedUser = await User.findOne({
@@ -18,6 +21,7 @@ module.exports.createTweet = async (req, res, next) => {
 
   const newTweet = {
     tweeter: userId,
+    isReply,
     text
   };
 

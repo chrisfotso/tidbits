@@ -36,6 +36,7 @@ const tweetSchema = new Schema({
       ref: "Tweet"
     }
   ],
+  isReply: Boolean,
   date: {
     type: Date,
     default: Date.now
