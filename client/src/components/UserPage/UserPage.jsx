@@ -17,7 +17,7 @@ const UserInfo = props => {
       </div>
       <div className="profile__stats">
         <p className="profile__stat">
-          <strong>{tweets.length}</strong> tweets
+          <strong>{tweets.length}</strong> tidbits
         </p>
         <p className="profile__stat">
           <strong>{followers.length}</strong> followers
@@ -69,7 +69,11 @@ const UserPage = props => {
               followers={user.followers}
               following={user.following}
             />
-            <Tweets initialTweets={user.tweets} onHomeScreen={false} />
+            <Tweets
+              initialTweets={user.tweets}
+              onHomeScreen={false}
+              history={history}
+            />
           </div>
         </>
       )}

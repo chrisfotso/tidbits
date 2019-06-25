@@ -12,6 +12,7 @@ const LoggedInHome = props => {
     <Dashboard setJwtToken={setJwtToken} history={history}>
       <Tweets
         isLoading={isLoading}
+        history={history}
         setIsLoading={setIsLoading}
         jwtAuthToken={jwtAuthToken}
         initialTweets={[]}

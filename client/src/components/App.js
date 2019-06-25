@@ -5,6 +5,7 @@ import Login from "./LoginRegister/Login";
 import Register, { RegisterSuccess } from "./LoginRegister/Register";
 import Home from "./Home/Home";
 import UserPage from "./UserPage/UserPage";
+import ExpandedTweet from "./Home/ExpandedTweet";
 
 const App = () => {
   const [jwtAuthToken, setJwtToken] = useState("");
@@ -31,6 +32,13 @@ const App = () => {
           exact
           path="/:username"
           render={props => <UserPage {...props} setJwtToken={setJwtToken} />}
+        />
+        <Route
+          exact
+          path="/tweet/:tweetId"
+          render={props => (
+            <ExpandedTweet {...props} jwtAuthToken={jwtAuthToken} />
+          )}
         />
         <Route
           exact

@@ -1,16 +1,23 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "../../download.png";
 
+import Tweets from "./Tweets";
+
 const Tweet = props => {
-  const displayTweet = e => {
-    if (e.target.classList.contains("tweet")) {
-      alert(props.id);
+  const handleTweetClick = e => {
+    if (
+      e.target.classList.contains("tweet__icon") ||
+      e.target.classList.contains("tweet__tweeter")
+    ) {
+      return;
     }
+
+    props.history.push(`/tweet/${props.id}`);
   };
 
   return (
-    <div className="tweet" onClick={displayTweet}>
+    <div className="tweet" onClick={handleTweetClick}>
       <div className="tweet__user-info">
         <img className="tweet__icon" src={Avatar} alt="Profile picture" />
         <Link

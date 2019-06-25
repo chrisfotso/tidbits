@@ -6,6 +6,7 @@ import TweetInput from "./TweetInput";
 const Tweets = props => {
   const {
     jwtAuthToken,
+    history,
     isLoading,
     setIsLoading,
     initialTweets,
@@ -37,7 +38,7 @@ const Tweets = props => {
     return function tweetsCleanup() {
       abortController.abort();
     };
-  }, [isLoading]);
+  }, [isLoading, initialTweets.length, jwtAuthToken]);
 
   const LoadingComponent = () => <div className="loading">Loading</div>;
 
@@ -54,9 +55,11 @@ const Tweets = props => {
           />
         )}
         {/* Destructuring the tweeter and text properties from each tweet document */}
-        {tweets.map(({ tweeter, text, tweetId }, index) => (
+        {tweets.map(({ tweeter, text, tweetId, replies }, index) => (
           <Tweet
+            history={history}
             tweeter={tweeter.username}
+            replies={replies}
             text={text}
             key={index}
             id={tweetId}
