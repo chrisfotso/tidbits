@@ -19,7 +19,10 @@ router.get("/all", verifyToken, async (req, res) => {
 //GET endpoint for retrieving a tweet
 router.get("/:id", verifyToken, async (req, res) => {
   const { id: tweetId } = req.params;
-  const retrievedTweet = await Tweet.findOne({ tweetId }).exec();
+  const retrievedTweet = await Tweet.findOne({ tweetId })
+    .populate("tweeter", "username")
+    .populate({ path: "replies", populate: { path: "tweeter" } })
+    .exec();
 
   //findOne() returns null if no document is found
   if (!retrievedTweet) {

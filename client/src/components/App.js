@@ -26,6 +26,7 @@ const App = () => {
           path="/tweet/:tweetId"
           Component={ExpandedTweet}
           jwtAuthToken={jwtAuthToken}
+          setJwtToken={setJwtToken}
         />
         <RouteWithProps
           path="/:username"

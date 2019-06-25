@@ -2,12 +2,16 @@ import React, { useState, useEffect } from "react";
 
 import Tweet from "./Tweet";
 import Tweets from "./Tweets";
+import Header from "./Header";
 
 const ExpandedTweets = props => {
   const {
     history,
     jwtAuthToken,
-    match: { params: tweetId }
+    setJwtToken,
+    match: {
+      params: { tweetId }
+    }
   } = props;
 
   const [parentTweet, setParentTweet] = useState({});
@@ -17,28 +21,41 @@ const ExpandedTweets = props => {
   useEffect(() => {
     const fetchOptions = {
       method: "GET",
-      Authorization: `Bearer ${jwtAuthToken}`
+      headers: {
+        Authorization: `Bearer ${jwtAuthToken}`,
+        Accept: "application/json"
+      }
     };
     fetch(`/tweet/${tweetId}`, fetchOptions)
-      .then(data => data.json)
+      .then(data => data.json())
       .then(retrievedTweet => {
         setParentTweet(retrievedTweet);
         setChildrenTweets(retrievedTweet.replies);
       })
-      .finally(setIsLoading(false))
-      .catch(err => console.log(err));
+      .finally(() => setIsLoading(false))
+      .catch(console.log);
   }, []);
 
+  if (isLoading) return <div>Loading</div>;
+
   return (
-    <div className="expanded-tweet">
-      <div className="expanded-tweet__container">
-        <p>{JSON.stringify(parentTweet)}</p>
-        {/* <Tweet
+    <div className="expanded">
+      <Header setJwtToken={setJwtToken} history={history} />
+      <div className="expanded__container">
+        <Tweet
           tweeter={parentTweet.tweeter.username}
           text={parentTweet.text}
           id={parentTweet.tweetId}
           history={history}
-        /> */}
+        />
+        <Tweets
+          jwtAuthToken={jwtAuthToken}
+          history={history}
+          initialTweets={childrenTweets}
+          onHomeScreen={false}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
       </div>
     </div>
   );

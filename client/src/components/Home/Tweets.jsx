@@ -12,21 +12,22 @@ const Tweets = props => {
     initialTweets,
     onHomeScreen
   } = props;
+
   const [tweets, setTweets] = useState(props.initialTweets);
 
   useEffect(() => {
     const abortController = new AbortController(); //Using abortController for cleanup; in case user leaves page while request is in progress
 
-    if (!initialTweets.length) {
-      const fetchOptions = {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${jwtAuthToken}`, //Setting bearer authorization header to include the JWT token passed through props
-          "Content-Type": "application/json"
-        },
-        signal: abortController.signal
-      };
+    const fetchOptions = {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${jwtAuthToken}`, //Setting bearer authorization header to include the JWT token passed through props
+        "Content-Type": "application/json"
+      },
+      signal: abortController.signal
+    };
 
+    if (onHomeScreen) {
       fetch("/tweet/all", fetchOptions)
         .then(data => data.json())
         .then(retrievedTweets => {
@@ -38,7 +39,7 @@ const Tweets = props => {
     return function tweetsCleanup() {
       abortController.abort();
     };
-  }, [isLoading, initialTweets.length, jwtAuthToken]);
+  });
 
   const LoadingComponent = () => <div className="loading">Loading</div>;
 
