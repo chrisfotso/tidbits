@@ -5,8 +5,6 @@ import Avatar from "../../download.png";
 import Tweets from "./Tweets";
 
 const Tweet = props => {
-  const [redirectLink, setRedirectLink] = useState("");
-
   const handleTweetClick = e => {
     const classNames = [
       "tweet__icon",
@@ -19,7 +17,7 @@ const Tweet = props => {
       return;
     }
 
-    setRedirectLink(`/tweet/${props.id}`);
+    props.history.push(`/tweet/${props.id}`);
   };
 
   const handleReplyClick = e => {
@@ -45,10 +43,6 @@ const Tweet = props => {
   };
 
   const handleLikeClick = e => console.log("like");
-
-  if (redirectLink.length) {
-    return <Redirect push to={redirectLink} />;
-  }
 
   return (
     <div className="tweet" onClick={handleTweetClick}>

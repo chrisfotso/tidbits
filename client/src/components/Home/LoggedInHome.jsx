@@ -5,14 +5,14 @@ import Tweets from "./Tweets";
 
 const LoggedInHome = props => {
   const { jwtAuthToken, setJwtToken, history } = props;
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   return (
     <Dashboard setJwtToken={setJwtToken} history={history}>
       <Tweets
-        isLoading={isLoading}
+        // isLoading={isLoading}
         history={history}
-        setIsLoading={setIsLoading}
+        // setIsLoading={setIsLoading}
         jwtAuthToken={jwtAuthToken}
         initialTweets={[]}
         onHomeScreen={true}

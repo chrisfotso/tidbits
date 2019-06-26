@@ -19,6 +19,7 @@ const ExpandedTweets = props => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    console.log("id", tweetId);
     const fetchOptions = {
       method: "GET",
       headers: {
@@ -33,10 +34,12 @@ const ExpandedTweets = props => {
         //Setting state with the retrieved data
         setParentTweet(retrievedTweet);
         setChildrenTweets(retrievedTweet.replies);
+        console.log("retrieved", retrievedTweet);
+        console.log("replies", retrievedTweet.replies);
       })
       .finally(() => setIsLoading(false))
       .catch(console.log);
-  }, [tweetId, parentTweet, childrenTweets, isLoading]); //Effect only runs if these variables change
+  }, [tweetId]); //Effect only runs if these variables change
 
   if (isLoading)
     return (
@@ -61,8 +64,8 @@ const ExpandedTweets = props => {
           history={history}
           initialTweets={childrenTweets}
           onHomeScreen={false}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
+          // isLoading={isLoading}
+          // setIsLoading={setIsLoading}
         />
       </div>
     </div>

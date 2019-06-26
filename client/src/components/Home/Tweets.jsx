@@ -7,13 +7,14 @@ const Tweets = props => {
   const {
     jwtAuthToken,
     history,
-    isLoading,
-    setIsLoading,
+    // isLoading,
+    // setIsLoading,
     initialTweets,
     onHomeScreen
   } = props;
 
   const [tweets, setTweets] = useState(initialTweets);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const abortController = new AbortController(); //Using abortController for cleanup; in case user leaves page while request is in progress
@@ -34,6 +35,9 @@ const Tweets = props => {
           setTweets(retrievedTweets);
           setIsLoading(false);
         });
+    } else {
+      setTweets(initialTweets);
+      setIsLoading(false);
     }
 
     return function tweetsCleanup() {
