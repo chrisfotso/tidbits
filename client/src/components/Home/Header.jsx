@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
+import { withRouter } from "react-router-dom";
+import { AuthContext } from "../AuthContext";
 import { Link } from "react-router-dom";
 
 const Header = props => {
-  const { setJwtToken, history } = props;
+  const { history } = props;
+  const { setJwtToken } = useContext(AuthContext);
 
   const handleLogout = () => {
     setJwtToken("");
@@ -40,4 +43,4 @@ const Header = props => {
   );
 };
 
-export default Header;
+export default withRouter(Header);

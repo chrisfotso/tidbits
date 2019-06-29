@@ -12,7 +12,7 @@ app.use(express.json());
 app.use("/user", userRouter);
 app.use("/tweet", tweetRouter);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5622;
 
 const initServer = () => {
   return app.listen(port, () => {

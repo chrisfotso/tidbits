@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+
+import { AuthContext } from "../AuthContext";
 
 import handleInputChange from "../../handlers/handleInputChange";
 import handleSubmit from "../../handlers/handleLoginRegisterSubmit";
@@ -8,7 +10,7 @@ const Login = props => {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
 
-  const { setJwtToken } = props;
+  const { setJwtToken } = useContext(AuthContext);
 
   const credentialsObj = { username, password };
 

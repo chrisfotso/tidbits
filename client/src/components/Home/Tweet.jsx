@@ -1,10 +1,15 @@
-import React, { Fragment, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import React, { useContext } from "react";
+import { withRouter } from "react-router-dom";
+
+import { AuthContext } from "../AuthContext";
+
+import { Link } from "react-router-dom";
 import Avatar from "../../download.png";
 
-import Tweets from "./Tweets";
-
 const Tweet = props => {
+  const { jwtAuthToken } = useContext(AuthContext);
+  const { id, tweeter, text, history } = props;
+
   const handleTweetClick = e => {
     const classNames = [
       "tweet__icon",
@@ -17,11 +22,11 @@ const Tweet = props => {
       return;
     }
 
-    props.history.push(`/tweet/${props.id}`);
+    history.push(`/tweet/${id}`);
   };
 
   const handleReplyClick = e => {
-    const newReply = prompt(`Enter your reply to ${props.tweeter}`);
+    const newReply = prompt(`Enter your reply to ${tweeter}`);
 
     if (newReply.length > 280) {
       return alert("Reply must be 280 characters or less");
@@ -30,15 +35,15 @@ const Tweet = props => {
     const fetchOptions = {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${props.jwtAuthToken}`,
+        Authorization: `Bearer ${jwtAuthToken}`,
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ text: newReply })
     };
 
-    fetch(`/tweet/${props.id}/reply`, fetchOptions)
+    fetch(`/tweet/${id}/reply`, fetchOptions)
       .then(data => data.json())
-      .finally(() => props.history.push(`/tweet/${props.id}`))
+      .finally(() => history.push(`/tweet/${id}`))
       .catch(console.log);
   };
 
@@ -49,13 +54,13 @@ const Tweet = props => {
       <div className="tweet__user-info">
         <img className="tweet__icon" src={Avatar} alt="Profile picture" />
         <Link
-          to={`/${props.tweeter}`}
+          to={`/${tweeter}`}
           style={{ textDecoration: "none", color: "#2f2f2f" }}
         >
-          <div className="tweet__tweeter">{props.tweeter}</div>
+          <div className="tweet__tweeter">{tweeter}</div>
         </Link>
       </div>
-      <p className="tweet__text">{props.text}</p>
+      <p className="tweet__text">{text}</p>
       <div className="tweet__buttons">
         <button
           className="tweet__reply tweet__button"
@@ -71,4 +76,4 @@ const Tweet = props => {
   );
 };
 
-export default Tweet;
+export default withRouter(Tweet);

@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+
+import { AuthContext } from "../AuthContext";
 
 import Tweet from "./Tweet";
 import Tweets from "./Tweets";
@@ -7,19 +9,18 @@ import Header from "./Header";
 const ExpandedTweets = props => {
   const {
     history,
-    jwtAuthToken,
-    setJwtToken,
     match: {
       params: { tweetId }
     }
   } = props;
 
+  const { jwtAuthToken, setJwtToken } = useContext(AuthContext);
+
   const [parentTweet, setParentTweet] = useState({});
-  const [childrenTweets, setChildrenTweets] = useState([]);
+  const [replies, setReplies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log("id", tweetId);
     const fetchOptions = {
       method: "GET",
       headers: {
@@ -31,15 +32,12 @@ const ExpandedTweets = props => {
     fetch(`/tweet/${tweetId}`, fetchOptions)
       .then(data => data.json())
       .then(retrievedTweet => {
-        //Setting state with the retrieved data
         setParentTweet(retrievedTweet);
-        setChildrenTweets(retrievedTweet.replies);
-        console.log("retrieved", retrievedTweet);
-        console.log("replies", retrievedTweet.replies);
+        setReplies(retrievedTweet.replies);
       })
       .finally(() => setIsLoading(false))
       .catch(console.log);
-  }, [tweetId]); //Effect only runs if these variables change
+  }, [tweetId]); //Effect only runs if tweetId changes and thus the url changes
 
   if (isLoading)
     return (
@@ -62,10 +60,8 @@ const ExpandedTweets = props => {
         <Tweets
           jwtAuthToken={jwtAuthToken}
           history={history}
-          initialTweets={childrenTweets}
+          initialTweets={replies}
           onHomeScreen={false}
-          // isLoading={isLoading}
-          // setIsLoading={setIsLoading}
         />
       </div>
     </div>

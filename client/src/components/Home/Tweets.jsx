@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../AuthContext";
 
 import Tweet from "./Tweet";
 import TweetInput from "./TweetInput";
 
 const Tweets = props => {
-  const {
-    jwtAuthToken,
-    history,
-    // isLoading,
-    // setIsLoading,
-    initialTweets,
-    onHomeScreen
-  } = props;
+  const { history, initialTweets, onHomeScreen } = props;
 
-  const [tweets, setTweets] = useState(initialTweets);
+  const { jwtAuthToken } = useContext(AuthContext);
+
+  const [tweets, setTweets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -45,28 +41,24 @@ const Tweets = props => {
     };
   });
 
-  const LoadingComponent = () => <div className="loading">Loading</div>;
-
   const filteredTweets = tweets.filter(tweet => !tweet.isReply); //Filtering out all tweets that are replies to other tweets
   const tweetsToUse = onHomeScreen ? filteredTweets : tweets; //If I'm on the home screen I don't want to display tweets that are replies
 
   if (isLoading) {
-    return <LoadingComponent />;
+    return (
+      <div className="tweets-container">
+        <div className="loading">Loading</div>
+      </div>
+    );
   } else
     return (
       <div className="tweets-container">
-        {onHomeScreen && (
-          <TweetInput
-            jwtAuthToken={jwtAuthToken}
-            setIsLoading={setIsLoading}
-            url="/tweet/new"
-          />
+        {onHomeScreen && ( //If I'm on the home screen I also want to show the tweet input component
+          <TweetInput setIsLoading={setIsLoading} url="/tweet/new" />
         )}
         {/* Destructuring the tweeter and text properties from each tweet document */}
         {tweetsToUse.map(({ tweeter, text, tweetId, replies }, index) => (
           <Tweet
-            jwtAuthToken={jwtAuthToken}
-            history={history}
             tweeter={tweeter.username}
             replies={replies}
             text={text}

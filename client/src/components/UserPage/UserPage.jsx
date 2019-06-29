@@ -32,7 +32,6 @@ const UserInfo = props => {
 const UserPage = props => {
   //Destructuring props to get the username param & history object from the route object and setJwtToken();
   const {
-    setJwtToken,
     history,
     match: {
       params: { username: paramsUsername }
@@ -60,7 +59,7 @@ const UserPage = props => {
         <LoadingComponent />
       ) : (
         <Fragment>
-          <Header setJwtToken={setJwtToken} history={history} />
+          <Header history={history} />
           <div className="profile__container">
             <UserInfo
               username={paramsUsername}
