@@ -14,7 +14,7 @@ const ExpandedTweets = props => {
     }
   } = props;
 
-  const { jwtAuthToken, setJwtToken } = useContext(AuthContext);
+  const { jwtAuthToken } = useContext(AuthContext);
 
   const [parentTweet, setParentTweet] = useState({});
   const [replies, setReplies] = useState([]);
@@ -48,21 +48,14 @@ const ExpandedTweets = props => {
 
   return (
     <div className="expanded">
-      <Header setJwtToken={setJwtToken} history={history} />
+      <Header />
       <div className="expanded__container">
         <Tweet
-          jwtAuthToken={jwtAuthToken}
           tweeter={parentTweet.tweeter.username}
           text={parentTweet.text}
           id={parentTweet.tweetId}
-          history={history}
         />
-        <Tweets
-          jwtAuthToken={jwtAuthToken}
-          history={history}
-          initialTweets={replies}
-          onHomeScreen={false}
-        />
+        <Tweets initialTweets={replies} onHomeScreen={false} />
       </div>
     </div>
   );

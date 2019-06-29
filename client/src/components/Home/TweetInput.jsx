@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../AuthContext";
 
 const TweetInput = props => {
   const [tweetText, setTweetText] = useState("");
   const [charsRemaining, setCharsRemaining] = useState(280);
 
-  const { jwtAuthToken, setIsLoading, url } = props;
+  const { setIsLoading, url } = props;
+  const { jwtAuthToken } = useContext(AuthContext);
 
   const handleChange = e => {
     const { value } = e.target;

@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../AuthContext";
+import React from "react";
 
 import Dashboard from "./Dashboard";
 import Tweets from "./Tweets";
 
-const LoggedInHome = props => (
+const LoggedInHome = () => (
   <Dashboard>
     <Tweets initialTweets={[]} onHomeScreen={true} />
   </Dashboard>

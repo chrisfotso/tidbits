@@ -4,7 +4,7 @@ import { AuthContext } from "../AuthContext";
 import LoggedOutHome from "./LoggedOutHome";
 import LoggedInHome from "./LoggedInHome";
 
-const Home = props => {
+const Home = () => {
   const { jwtAuthToken } = useContext(AuthContext);
 
   if (jwtAuthToken) return <LoggedInHome />;

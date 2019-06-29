@@ -59,7 +59,7 @@ const UserPage = props => {
         <LoadingComponent />
       ) : (
         <Fragment>
-          <Header history={history} />
+          <Header />
           <div className="profile__container">
             <UserInfo
               username={paramsUsername}
@@ -67,11 +67,7 @@ const UserPage = props => {
               followers={user.followers}
               following={user.following}
             />
-            <Tweets
-              initialTweets={user.tweets}
-              onHomeScreen={false}
-              history={history}
-            />
+            <Tweets initialTweets={user.tweets} onHomeScreen={false} />
           </div>
         </Fragment>
       )}

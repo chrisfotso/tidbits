@@ -5,7 +5,7 @@ import Tweet from "./Tweet";
 import TweetInput from "./TweetInput";
 
 const Tweets = props => {
-  const { history, initialTweets, onHomeScreen } = props;
+  const { initialTweets, onHomeScreen } = props;
 
   const { jwtAuthToken } = useContext(AuthContext);
 

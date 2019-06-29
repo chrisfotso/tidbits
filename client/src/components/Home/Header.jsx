@@ -22,7 +22,7 @@ const Header = props => {
     }
   };
 
-  //Adds scroll event listener to window and handles cleanup on unmount
+  //Adds scroll event listener to window on mount and removes it on unmount
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
 
